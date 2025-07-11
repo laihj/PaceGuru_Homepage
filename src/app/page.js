@@ -17,7 +17,7 @@ export default function Home() {
             />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 font-[family-name:var(--font-geist-sans)]">
-            Pace Guru
+            PaceGuru
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
             Unlock your best run with Pace Guru—your all-in-one running companion for Apple Watch. 
