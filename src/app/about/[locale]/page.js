@@ -2,6 +2,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getAboutContent } from '../../../lib/about';
+import LanguageSwitcher from '../../../components/LanguageSwitcher';
 
 export default async function AboutLocale({ params }) {
   const { locale } = await params;
@@ -28,7 +29,7 @@ export default async function AboutLocale({ params }) {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       {/* Navigation */}
       <nav className="absolute top-0 right-0 p-6">
-        <div className="flex gap-6">
+        <div className="flex gap-6 items-center">
           <Link
             href="/"
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
@@ -41,6 +42,7 @@ export default async function AboutLocale({ params }) {
           >
             Blog
           </Link>
+          <LanguageSwitcher />
         </div>
       </nav>
 

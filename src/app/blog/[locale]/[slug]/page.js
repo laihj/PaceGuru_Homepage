@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getPostBySlug, getBlogPosts } from '../../../../lib/posts';
 import { notFound } from 'next/navigation';
+import LanguageSwitcher from '../../../../components/LanguageSwitcher';
 
 export default async function BlogPost({ params }) {
   const { locale, slug } = await params;
@@ -16,7 +17,7 @@ export default async function BlogPost({ params }) {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       {/* Navigation */}
       <nav className="absolute top-0 right-0 p-6">
-        <div className="flex gap-6">
+        <div className="flex gap-6 items-center">
           <Link
             href="/"
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
@@ -29,6 +30,7 @@ export default async function BlogPost({ params }) {
           >
             About
           </Link>
+          <LanguageSwitcher />
         </div>
       </nav>
 
@@ -48,11 +50,14 @@ export default async function BlogPost({ params }) {
             
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
               <time dateTime={post.frontmatter.date}>
-                {new Date(post.frontmatter.date).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
+                {new Date(post.frontmatter.date).toLocaleDateString(
+                  locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US',
+                  { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  }
+                )}
               </time>
               
               {post.frontmatter.category && (
