@@ -9,7 +9,7 @@ export default function Home() {
           <div className="mb-6 flex justify-center">
             <Image
               src="/pageguru.png"
-              alt="Pace Guru Logo"
+              alt="PaceGuru Logo"
               width={80}
               height={80}
               className="rounded-2xl shadow-lg"
@@ -20,7 +20,7 @@ export default function Home() {
             PaceGuru
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-            Unlock your best run with Pace Guru—your all-in-one running companion for Apple Watch. 
+            Unlock your best run with PaceGuru—your all-in-one running companion for Apple Watch. 
             Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.
           </p>
         </div>
@@ -150,7 +150,7 @@ export default function Home() {
             Get Started Today
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-12">
-            Download Pace Guru and unlock your full running potential today!
+            Download PaceGuru and unlock your full running potential today!
           </p>
           
           <div className="mb-16">
