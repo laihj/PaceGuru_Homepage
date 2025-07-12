@@ -1,8 +1,27 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      {/* Navigation */}
+      <nav className="absolute top-0 right-0 p-6">
+        <div className="flex gap-6">
+          <Link
+            href="/blog"
+            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/about"
+            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+          >
+            About
+          </Link>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="px-4 pt-20 pb-16 text-center max-w-4xl mx-auto">
         <div className="mb-8">
