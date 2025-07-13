@@ -13,21 +13,27 @@ export default async function BlogLocale({ params }) {
       subtitle: 'Tips, tutorials, and insights for better running performance',
       noPosts: 'No posts yet',
       noPostsDesc: 'Stay tuned for upcoming content!',
-      readMore: 'Read more →'
+      readMore: 'Read more →',
+      home: 'Home',
+      about: 'About'
     },
     zh: {
       title: 'PaceGuru 博客',
       subtitle: '提升跑步表现的技巧、教程和见解',
       noPosts: '暂无文章',
       noPostsDesc: '敬请期待即将发布的内容！',
-      readMore: '阅读更多 →'
+      readMore: '阅读更多 →',
+      home: '首页',
+      about: '关于'
     },
     ja: {
       title: 'PaceGuru ブログ',
       subtitle: 'より良いランニングパフォーマンスのためのヒント、チュートリアル、洞察',
       noPosts: '投稿はまだありません',
       noPostsDesc: '今後のコンテンツをお楽しみに！',
-      readMore: '続きを読む →'
+      readMore: '続きを読む →',
+      home: 'ホーム',
+      about: 'について'
     }
   };
 
@@ -42,13 +48,13 @@ export default async function BlogLocale({ params }) {
             href={locale === 'en' ? '/' : `/${locale}`}
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
           >
-            Home
+            {t.home}
           </Link>
           <Link
             href={`/about/${locale}`}
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
           >
-            About
+            {t.about}
           </Link>
           <LanguageSwitcher />
         </div>

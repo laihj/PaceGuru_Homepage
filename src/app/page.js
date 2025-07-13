@@ -4,8 +4,47 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 import LocaleRedirect from "../components/LocaleRedirect";
 
 export default function Home() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'PaceGuru',
+    description: 'Your all-in-one running companion for Apple Watch. Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.',
+    applicationCategory: 'HealthApplication',
+    operatingSystem: 'watchOS, iOS',
+    url: 'https://paceguru.app',
+    downloadUrl: 'https://apps.apple.com/us/app/paceguru/id6468926049',
+    publisher: {
+      '@type': 'Organization',
+      name: 'PaceGuru Team',
+      email: 'hamainter@gmail.com'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD'
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      ratingCount: '100+'
+    },
+    featureList: [
+      'Seamless Apple Watch Sync',
+      'Advanced Run Tracking',
+      'Performance Insights',
+      'Personalized Training Plans',
+      'Smart Analytics',
+      'Heart Rate Zones',
+      'Pace Analysis'
+    ]
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* 客户端组件用于首次访问的语言检测 */}
       <LocaleRedirect targetPath="/" />
       
