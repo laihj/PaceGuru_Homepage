@@ -95,8 +95,16 @@ export function buildLocalizedUrl(path, locale) {
 // 从URL中提取当前语言
 export function extractLocaleFromPath(pathname) {
   const pathParts = pathname.split('/').filter(Boolean);
-  const firstPart = pathParts[0];
   
+  // 处理 /blog/locale 和 /about/locale 格式
+  if (pathParts.length >= 2) {
+    if ((pathParts[0] === 'blog' || pathParts[0] === 'about') && SUPPORTED_LOCALES.includes(pathParts[1])) {
+      return pathParts[1];
+    }
+  }
+  
+  // 处理 /locale 格式
+  const firstPart = pathParts[0];
   if (SUPPORTED_LOCALES.includes(firstPart)) {
     return firstPart;
   }

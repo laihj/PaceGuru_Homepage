@@ -28,20 +28,34 @@ export default function LanguageSwitcher() {
     // 构建新的本地化URL
     if (locale === 'en') {
       // 英文使用无前缀路径，但对于 /blog 和 /about 需要添加 /en
-      if (pathWithoutLocale === '/blog' || pathWithoutLocale.startsWith('/blog/')) {
-        return `/blog/en${pathWithoutLocale.replace('/blog', '')}`;
+      if (pathWithoutLocale === '/blog') {
+        return `/blog/en`;
       }
-      if (pathWithoutLocale === '/about' || pathWithoutLocale.startsWith('/about/')) {
-        return `/about/en${pathWithoutLocale.replace('/about', '')}`;
+      if (pathWithoutLocale.startsWith('/blog/') && pathParts.length >= 2 && SUPPORTED_LOCALES.includes(pathParts[1])) {
+        // 如果是 /blog/zh 这样的路径，替换为 /blog/en
+        return `/blog/en`;
+      }
+      if (pathWithoutLocale === '/about') {
+        return `/about/en`;
+      }
+      if (pathWithoutLocale.startsWith('/about/') && pathParts.length >= 2 && SUPPORTED_LOCALES.includes(pathParts[1])) {
+        return `/about/en`;
       }
       return pathWithoutLocale || '/';
     } else {
       // 其他语言使用前缀
-      if (pathWithoutLocale === '/blog' || pathWithoutLocale.startsWith('/blog/')) {
-        return `/blog/${locale}${pathWithoutLocale.replace('/blog', '')}`;
+      if (pathWithoutLocale === '/blog') {
+        return `/blog/${locale}`;
       }
-      if (pathWithoutLocale === '/about' || pathWithoutLocale.startsWith('/about/')) {
-        return `/about/${locale}${pathWithoutLocale.replace('/about', '')}`;
+      if (pathWithoutLocale.startsWith('/blog/') && pathParts.length >= 2 && SUPPORTED_LOCALES.includes(pathParts[1])) {
+        // 如果是 /blog/en 这样的路径，替换为 /blog/locale
+        return `/blog/${locale}`;
+      }
+      if (pathWithoutLocale === '/about') {
+        return `/about/${locale}`;
+      }
+      if (pathWithoutLocale.startsWith('/about/') && pathParts.length >= 2 && SUPPORTED_LOCALES.includes(pathParts[1])) {
+        return `/about/${locale}`;
       }
       return `/${locale}${pathWithoutLocale}`;
     }

@@ -3,7 +3,6 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getPostBySlug, getBlogPosts } from '../../../../lib/posts';
 import { notFound } from 'next/navigation';
-import LanguageSwitcher from '../../../../components/LanguageSwitcher';
 
 export default async function BlogPost({ params }) {
   const { locale, slug } = await params;
@@ -19,18 +18,17 @@ export default async function BlogPost({ params }) {
       <nav className="absolute top-0 right-0 p-6">
         <div className="flex gap-6 items-center">
           <Link
-            href="/"
+            href={locale === 'en' ? '/' : `/${locale}`}
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
           >
             Home
           </Link>
           <Link
-            href="/about"
+            href={`/about/${locale}`}
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
           >
             About
           </Link>
-          <LanguageSwitcher />
         </div>
       </nav>
 

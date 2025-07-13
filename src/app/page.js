@@ -15,13 +15,13 @@ export default function Home() {
         <nav className="absolute top-0 right-0 p-6">
           <div className="flex gap-6 items-center">
             <Link
-              href="/blog"
+              href="/blog/en"
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
             >
               Blog
             </Link>
             <Link
-              href="/about"
+              href="/about/en"
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
             >
               About

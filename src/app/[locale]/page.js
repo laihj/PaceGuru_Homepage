@@ -140,13 +140,13 @@ export default async function LocalizedHome({ params }) {
       <nav className="absolute top-0 right-0 p-6">
         <div className="flex gap-6 items-center">
           <Link
-            href="/blog"
+            href={`/blog/${locale}`}
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
           >
             {t.blog}
           </Link>
           <Link
-            href="/about"
+            href={`/about/${locale}`}
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
           >
             {t.about}
