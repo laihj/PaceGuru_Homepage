@@ -12,6 +12,27 @@ export default async function BlogPost({ params }) {
     notFound();
   }
 
+  // 本地化文本
+  const texts = {
+    en: {
+      home: 'Home',
+      about: 'About',
+      backToBlog: '← Back to Blog'
+    },
+    zh: {
+      home: '首页',
+      about: '关于',
+      backToBlog: '← 返回博客'
+    },
+    ja: {
+      home: 'ホーム',
+      about: 'About',
+      backToBlog: '← ブログに戻る'
+    }
+  };
+
+  const t = texts[locale] || texts.en;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       {/* Navigation */}
@@ -21,13 +42,13 @@ export default async function BlogPost({ params }) {
             href={locale === 'en' ? '/' : `/${locale}`}
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
           >
-            Home
+            {t.home}
           </Link>
           <Link
             href={`/about/${locale}`}
             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
           >
-            About
+            {t.about}
           </Link>
         </div>
       </nav>
@@ -38,7 +59,7 @@ export default async function BlogPost({ params }) {
             href={`/blog/${locale}`}
             className="text-blue-600 dark:text-blue-400 hover:underline mb-4 inline-block"
           >
-            ← Back to Blog
+            {t.backToBlog}
           </Link>
         </div>
         
