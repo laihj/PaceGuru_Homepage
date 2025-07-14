@@ -4,6 +4,70 @@ import remarkGfm from 'remark-gfm';
 import { getPostBySlug, getBlogPosts } from '../../../../lib/posts';
 import { notFound } from 'next/navigation';
 
+export async function generateMetadata({ params }) {
+  const { locale, slug } = await params;
+  const post = getPostBySlug('blog', locale, slug);
+  
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+      description: 'The requested blog post could not be found.'
+    };
+  }
+
+  const title = post.frontmatter.title;
+  const description = post.frontmatter.excerpt || post.content.substring(0, 160).replace(/[#*`]/g, '').trim();
+  const canonicalUrl = `https://paceguru.app/blog/${locale}/${slug}`;
+  const imageUrl = post.frontmatter.featuredImage || 'https://paceguru.app/pageguru.png';
+
+  return {
+    title: `${title} - PaceGuru Blog`,
+    description: description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        'en': `https://paceguru.app/blog/en/${slug}`,
+        'zh': `https://paceguru.app/blog/zh/${slug}`,
+        'ja': `https://paceguru.app/blog/ja/${slug}`,
+      },
+    },
+    openGraph: {
+      title: title,
+      description: description,
+      url: canonicalUrl,
+      siteName: 'PaceGuru',
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }
+      ],
+      locale: locale,
+      type: 'article',
+      publishedTime: post.frontmatter.date,
+      authors: ['PaceGuru Team'],
+      section: post.frontmatter.category || 'General',
+      tags: post.frontmatter.tags || [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: title,
+      description: description,
+      images: [imageUrl],
+      creator: '@paceguru',
+    },
+    keywords: [
+      'Apple Watch running',
+      'running app',
+      'pace tracking',
+      ...(post.frontmatter.tags || []),
+      ...(post.frontmatter.keywords || [])
+    ].join(', '),
+  };
+}
+
 export default async function BlogPost({ params }) {
   const { locale, slug } = await params;
   const post = getPostBySlug('blog', locale, slug);
@@ -33,8 +97,52 @@ export default async function BlogPost({ params }) {
 
   const t = texts[locale] || texts.en;
 
+  // Generate article schema JSON-LD
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.frontmatter.title,
+    description: post.frontmatter.excerpt || post.content.substring(0, 160).replace(/[#*`]/g, '').trim(),
+    image: post.frontmatter.featuredImage || 'https://paceguru.app/pageguru.png',
+    datePublished: post.frontmatter.date,
+    dateModified: post.frontmatter.date,
+    author: {
+      '@type': 'Organization',
+      name: 'PaceGuru Team',
+      url: 'https://paceguru.app',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'PaceGuru',
+      url: 'https://paceguru.app',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://paceguru.app/pageguru.png',
+        width: 1200,
+        height: 630,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://paceguru.app/blog/${locale}/${slug}`,
+    },
+    articleSection: post.frontmatter.category || 'General',
+    keywords: [
+      'Apple Watch running',
+      'running app',
+      'pace tracking',
+      ...(post.frontmatter.tags || [])
+    ].join(', '),
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema, null, 2)
+        }}
+      />
       {/* Navigation */}
       <nav className="absolute top-0 right-0 p-6">
         <div className="flex gap-6 items-center">

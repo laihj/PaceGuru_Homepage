@@ -4,6 +4,69 @@ import remarkGfm from 'remark-gfm';
 import { getAboutContent } from '../../../lib/about';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
 
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const about = getAboutContent(locale);
+  
+  const texts = {
+    en: {
+      title: 'About PaceGuru',
+      description: 'Learn about PaceGuru, the ultimate Apple Watch running companion app designed to help you track and improve your running performance.',
+      keywords: 'about paceguru, apple watch running app, running tracker, fitness app'
+    },
+    zh: {
+      title: '关于 PaceGuru',
+      description: '了解 PaceGuru，专为 Apple Watch 设计的终极跑步伴侣应用，帮助您跟踪和提升跑步表现。',
+      keywords: '关于 paceguru, apple watch 跑步应用, 跑步追踪器, 健身应用'
+    },
+    ja: {
+      title: 'PaceGuru について',
+      description: 'ランニングパフォーマンスの追跡と向上を支援する、Apple Watch 向け究極のランニングコンパニオンアプリ PaceGuru について学びましょう。',
+      keywords: 'paceguru について, apple watch ランニングアプリ, ランニングトラッカー, フィットネスアプリ'
+    }
+  };
+
+  const t = texts[locale] || texts.en;
+  const canonicalUrl = `https://paceguru.app/about/${locale}`;
+
+  return {
+    title: t.title,
+    description: t.description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        'en': 'https://paceguru.app/about/en',
+        'zh': 'https://paceguru.app/about/zh',
+        'ja': 'https://paceguru.app/about/ja',
+      },
+    },
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: canonicalUrl,
+      siteName: 'PaceGuru',
+      images: [
+        {
+          url: 'https://paceguru.app/pageguru.png',
+          width: 1200,
+          height: 630,
+          alt: t.title,
+        }
+      ],
+      locale: locale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.title,
+      description: t.description,
+      images: ['https://paceguru.app/pageguru.png'],
+      creator: '@paceguru',
+    },
+    keywords: t.keywords,
+  };
+}
+
 export default async function AboutLocale({ params }) {
   const { locale } = await params;
   const about = getAboutContent(locale);

@@ -2,6 +2,68 @@ import Link from 'next/link';
 import { getBlogPosts } from '../../../lib/posts';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
 
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  
+  const texts = {
+    en: {
+      title: 'PaceGuru Blog',
+      description: 'Tips, tutorials, and insights for better running performance with Apple Watch.',
+      keywords: 'Apple Watch running, running app, pace tracking, running tips, fitness blog'
+    },
+    zh: {
+      title: 'PaceGuru 博客',
+      description: '使用 Apple Watch 提升跑步表现的技巧、教程和见解。',
+      keywords: 'Apple Watch 跑步, 跑步应用, 配速跟踪, 跑步技巧, 健身博客'
+    },
+    ja: {
+      title: 'PaceGuru ブログ',
+      description: 'Apple Watch を使ったより良いランニングパフォーマンスのためのヒント、チュートリアル、洞察。',
+      keywords: 'Apple Watch ランニング, ランニングアプリ, ペーストラッキング, ランニングヒント, フィットネスブログ'
+    }
+  };
+
+  const t = texts[locale] || texts.en;
+  const canonicalUrl = `https://paceguru.app/blog/${locale}`;
+
+  return {
+    title: t.title,
+    description: t.description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        'en': 'https://paceguru.app/blog/en',
+        'zh': 'https://paceguru.app/blog/zh',
+        'ja': 'https://paceguru.app/blog/ja',
+      },
+    },
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: canonicalUrl,
+      siteName: 'PaceGuru',
+      images: [
+        {
+          url: 'https://paceguru.app/pageguru.png',
+          width: 1200,
+          height: 630,
+          alt: t.title,
+        }
+      ],
+      locale: locale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.title,
+      description: t.description,
+      images: ['https://paceguru.app/pageguru.png'],
+      creator: '@paceguru',
+    },
+    keywords: t.keywords,
+  };
+}
+
 export default async function BlogLocale({ params }) {
   const { locale } = await params;
   const posts = getBlogPosts(locale);
