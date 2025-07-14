@@ -12,10 +12,10 @@ I hadn't thought about this feature before. The main obstacle was thinking that 
 
 Here's a simple introduction to this feature:
 
-![shoe](/blog/zh/images/shoe.png)
+![shoe](/blog/en/images/shoelist.png)
 
 We've added an entry point on the homepage - click "Manage Your Shoe Collection". In this interface, you can add and edit running shoe information. If you set a shoe as default here, every time you sync new running records, they will automatically be linked to this pair of shoes.
 
-![detail](/blog/zh/images/detail.png)
+![detail](/blog/en/images/detail.png)
 
 In your running records, you can see which shoes were used for each run and can choose to replace them.
