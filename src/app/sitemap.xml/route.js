@@ -9,11 +9,25 @@ export async function GET() {
   let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
   sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
   
+  // Helper function to format date to YYYY-MM-DD
+  const formatDate = (dateString) => {
+    if (!dateString) return new Date().toISOString().split('T')[0];
+    
+    // Handle both YYYY-MM-DD and YYYY-MM-DD HH:MM:SS formats
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return new Date().toISOString().split('T')[0];
+    }
+    
+    return date.toISOString().split('T')[0];
+  };
+
   // Helper function to add URLs to sitemap
   const addUrl = (loc, lastmod, changefreq = 'weekly', priority = '0.8') => {
+    const formattedDate = formatDate(lastmod);
     sitemap += '  <url>\n';
     sitemap += `    <loc>${loc}</loc>\n`;
-    sitemap += `    <lastmod>${lastmod}</lastmod>\n`;
+    sitemap += `    <lastmod>${formattedDate}</lastmod>\n`;
     sitemap += `    <changefreq>${changefreq}</changefreq>\n`;
     sitemap += `    <priority>${priority}</priority>\n`;
     
@@ -34,7 +48,7 @@ export async function GET() {
   locales.forEach(locale => {
     const aboutUrl = `${baseUrl}/about/${locale}`;
     const aboutContent = getAboutContent(locale);
-    const lastmod = aboutContent?.frontmatter?.date || new Date().toISOString().split('T')[0];
+    const lastmod = formatDate(aboutContent?.frontmatter?.date);
     addUrl(aboutUrl, lastmod, 'monthly', '0.8');
   });
   
@@ -43,7 +57,7 @@ export async function GET() {
     const blogUrl = `${baseUrl}/blog/${locale}`;
     const posts = getBlogPosts(locale);
     const latestPost = posts[0];
-    const lastmod = latestPost?.frontmatter?.date || new Date().toISOString().split('T')[0];
+    const lastmod = formatDate(latestPost?.frontmatter?.date);
     addUrl(blogUrl, lastmod, 'weekly', '0.9');
   });
   
