@@ -219,7 +219,7 @@ const DataTable = ({ data }) => {
       pdfElement.style.cssText = 'position: absolute; left: 0; top: 0; visibility: visible; z-index: 9999; background: white;';
 
       // Create PDF
-      const PDF = new jsPDF('', 'pt', 'a4');
+      const PDF = new jsPDF('p', 'pt', 'a4');
 
       // Generate first page (first 9 weeks)
       const page1Element = document.querySelector('#pdf-page1');
@@ -232,11 +232,11 @@ const DataTable = ({ data }) => {
 
       const page1Width = canvas1.width;
       const page1Height = canvas1.height;
-      const page1ImgWidth = 595.28;
-      const page1ImgHeight = (595.28 / page1Width) * page1Height;
+      const page1Ratio = Math.min(595.28 / page1Width, 842 / page1Height) * 0.85;
+      const page1ImgWidth = page1Width * page1Ratio;
+      const page1ImgHeight = page1Height * page1Ratio;
       const page1Data = canvas1.toDataURL('image/jpeg', 1.0);
-      
-      PDF.addImage(page1Data, 'JPEG', 0, 50, page1ImgWidth, page1ImgHeight);
+      PDF.addImage(page1Data, 'JPEG', (595.28 - page1ImgWidth) / 2, 50, page1ImgWidth, page1ImgHeight);
 
       // Generate second page (last 9 weeks)
       const page2Element = document.querySelector('#pdf-page2');
@@ -249,13 +249,14 @@ const DataTable = ({ data }) => {
 
       const page2Width = canvas2.width;
       const page2Height = canvas2.height;
-      const page2ImgWidth = 595.28;
-      const page2ImgHeight = (595.28 / page2Width) * page2Height;
+      const page2Ratio = Math.min(595.28 / page2Width, 842 / page2Height) * 0.85;
+      const page2ImgWidth = page2Width * page2Ratio;
+      const page2ImgHeight = page2Height * page2Ratio;
       const page2Data = canvas2.toDataURL('image/jpeg', 1.0);
       
       // Add new page for second table
       PDF.addPage();
-      PDF.addImage(page2Data, 'JPEG', 0, 50, page2ImgWidth, page2ImgHeight);
+      PDF.addImage(page2Data, 'JPEG', (595.28 - page2ImgWidth) / 2, 50, page2ImgWidth, page2ImgHeight);
 
       // Hide PDF content again
       pdfElement.style.cssText = originalStyle;
@@ -510,7 +511,7 @@ const DataTable = ({ data }) => {
           {!showAll && (
             <div>
               {/* First page - Pace table + First 9 weeks */}
-              <div id="pdf-page1" className="pdf-page">
+              <div id="pdf-page1" className="pdf-page pdf-full-height">
                 <div className="mb-6">
                   <Table
                     dataSource={[selectedDataRow].filter(Boolean).map((item, index) => ({ ...item, key: index }))}
@@ -527,11 +528,12 @@ const DataTable = ({ data }) => {
                   bordered
                   size="middle"
                   scroll={{ x: 'max-content' }}
+                  className="pdf-plan-table"
                 />
               </div>
 
               {/* Second page - Pace table + Last 9 weeks */}
-              <div id="pdf-page2" className="pdf-page page-break">
+              <div id="pdf-page2" className="pdf-page pdf-full-height page-break">
                 <div className="mb-6">
                   <Table
                     dataSource={[selectedDataRow].filter(Boolean).map((item, index) => ({ ...item, key: index }))}
@@ -548,6 +550,7 @@ const DataTable = ({ data }) => {
                   bordered
                   size="middle"
                   scroll={{ x: 'max-content' }}
+                  className="pdf-plan-table"
                 />
               </div>
             </div>
