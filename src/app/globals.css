@@ -19,3 +19,83 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Hanson runner-tools styles */
+.duration-text {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.hint {
+  color: #4b4f53;
+  margin-bottom: 2rem;
+}
+
+/* Plan cell styling */
+.plan-cell {
+  text-align: center;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  padding: 4px;
+}
+
+.plan-cell div {
+  margin-bottom: 2px;
+}
+
+.plan-cell div:last-child {
+  margin-bottom: 0;
+}
+
+/* PDF print styles */
+#printplan {
+  width: 100%;
+  padding: 20px;
+}
+
+.no-print {
+  display: block !important;
+}
+
+.page-break {
+  page-break-before: always;
+  break-before: page;
+  margin-top: 40px;
+}
+
+.pdf-page {
+  width: 100%;
+  padding: 20px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+}
+
+.controls-row {
+  display: flex;
+  gap: 40px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-group label {
+  white-space: nowrap;
+  min-width: 80px;
+}

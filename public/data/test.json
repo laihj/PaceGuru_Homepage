@@ -1,0 +1,274 @@
+[
+    {
+        "week": 1,
+        "schedule": 
+            [
+                {    
+                    "day": 1,
+                    "type": "rest",
+                    "warm": false,
+                    "excise" : [],
+                    "cold": false,
+                    "desc": "Rest"
+                },
+                {    
+                    "day": 2,
+                    "type": "tempo",
+                    "warm": true,
+                    "excise" : [
+                        {
+                            "distance":8,
+                            "paceType":"tempo"
+                        }
+                    ],
+                    "cold": true,
+                    "desc": "Tempo @MP"
+                },
+                {    
+                    "day": 3,
+                    "type": "strenght",
+                    "warm": true,
+                    "excise" : [
+                        {
+                            "distance":1.6,
+                            "paceType":"strenght"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":1.6,
+                            "paceType":"strenght"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        }
+                    ],
+                    "cold": true,
+                    "desc": "",
+                    "excisedesc": "2 x 1.6 KM 间歇 400米Rest"
+                },
+                {    
+                    "day": 4,
+                    "type": "lsd",
+                    "warm": false,
+                    "excise" : [
+                        {
+                            "distance":16,
+                            "paceType":"lsd"
+                        }
+                    ],
+                    "cold": false,
+                    "desc": "长距离"
+                },
+                {    
+                    "day": 5,
+                    "type": "easy",
+                    "warm": false,
+                    "excise" : [
+                        {
+                            "distance":5,
+                            "paceType":"easy"
+                        }
+                    ],
+                    "cold": false,
+                    "desc": "Easy"
+                },
+                {    
+                    "day": 6,
+                    "type": "speed",
+                    "warm": true,
+                    "excise" : [
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        }
+                    ],
+                    "cold": true,
+                    "desc": "",
+                    "excisedesc": "10 x 400米间歇 400米Rest"
+                },
+                {    
+                    "day": 7,
+                    "type": "easy",
+                    "warm": false,
+                    "excise" : [
+                        {
+                            "distance":5,
+                            "paceType":"easy"
+                        }
+                    ],
+                    "cold": false,
+                    "desc": "Easy"
+                }
+            ]
+    },
+    {
+        "week": 2,
+        "schedule": 
+            [
+                {    
+                    "day": 1,
+                    "type": "rest",
+                    "warm": false,
+                    "excise" : [],
+                    "cold": false,
+                    "desc": "Rest"
+                },
+                {    
+                    "day": 2,
+                    "type": "rest",
+                    "warm": false,
+                    "excise" : [],
+                    "cold": false,
+                    "desc": "Rest"
+                },
+                {    
+                    "day": 3,
+                    "type": "rest",
+                    "warm": false,
+                    "excise" : [],
+                    "cold": false,
+                    "desc": "Rest"
+                },
+                {    
+                    "day": 4,
+                    "type": "rest",
+                    "warm": false,
+                    "excise" : [],
+                    "cold": false,
+                    "desc": "Rest"
+                },
+                {    
+                    "day": 5,
+                    "type": "easy",
+                    "warm": false,
+                    "excise" : [
+                        {
+                            "distance":5,
+                            "paceType":"easy"
+                        }
+                    ],
+                    "cold": false,
+                    "desc": "Easy"
+                },
+                {    
+                    "day": 6,
+                    "type": "speed",
+                    "warm": false,
+                    "excise" : [
+                        {
+                            "distance":0.8,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        },
+                        {
+                            "distance":0.8,
+                            "paceType":"speed"
+                        },
+                        {
+                            "distance":0.4,
+                            "paceType":"recover"
+                        }
+                    ],
+                    "cold": false,
+                    "desc": "",
+                    "excisedesc": "10 x 400米间歇 400米Rest"
+                },
+                {    
+                    "day": 7,
+                    "type": "easy",
+                    "warm": false,
+                    "excise" : [
+                        {
+                            "distance":5,
+                            "paceType":"easy"
+                        }
+                    ],
+                    "cold": false,
+                    "desc": "Easy"
+                }
+            ]
+    }
+]
