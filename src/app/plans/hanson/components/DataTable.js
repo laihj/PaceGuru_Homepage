@@ -552,9 +552,8 @@ const DataTable = ({ data }) => {
                 <Col span={6}>
                   <div className="input-group">
                     <label>Race Date</label>
-                    <input
+                    <Input
                       type="date"
-                      className="ant-input"
                       value={raceDate}
                       onChange={(e) => {
                         setRaceDate(e.target.value);
@@ -567,7 +566,6 @@ const DataTable = ({ data }) => {
                           setRaceDate('');
                         }
                       }}
-                      style={{ width: '100%' }}
                       min={new Date().toISOString().split('T')[0]}
                     />
                   </div>

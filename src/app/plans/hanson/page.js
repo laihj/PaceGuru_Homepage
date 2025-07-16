@@ -25,7 +25,7 @@ export default function HansonPage() {
     <ConfigProvider locale={zhCN}>
       <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-center mb-4">
+          <h1 className="text-3xl font-bold text-center mb-4 text-gray-900">
             Hanson Marathon Method Pace Calculator
           </h1>
           <h3 className="text-lg text-center hint">
