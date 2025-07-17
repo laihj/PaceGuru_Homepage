@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
@@ -21,7 +21,7 @@ const texts = {
   }
 };
 
-export default function HansonPage() {
+function HansonPageContent() {
   const [paceData, setPaceData] = useState([]);
   const [mounted, setMounted] = useState(false);
   const searchParams = useSearchParams();
@@ -90,5 +90,15 @@ export default function HansonPage() {
         </div>
       </div>
     </ConfigProvider>
+  );
+}
+
+export default function HansonPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="text-gray-600">Loading...</div>
+    </div>}>
+      <HansonPageContent />
+    </Suspense>
   );
 }
