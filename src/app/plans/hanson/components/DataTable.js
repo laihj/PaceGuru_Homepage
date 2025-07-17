@@ -7,7 +7,82 @@ import jsPDF from 'jspdf';
 
 const { Option } = Select;
 
-const DataTable = ({ data }) => {
+const DataTable = ({ data, locale = 'zh' }) => {
+  const texts = {
+    zh: {
+      title: {
+        full: "全程马拉松",
+        half: "半程马拉松",
+        recovery: "恢复跑",
+        easyslow: "轻松跑慢",
+        easyfast: "轻松跑快",
+        lsd: "LSD",
+        tempo: "马配",
+        strenght: "力量跑",
+        ten: "10公里",
+        five: "5公里"
+      },
+      plan: {
+        beginner: "初学者",
+        advanced: "进阶者",
+        warmUp: "热身",
+        coolDown: "放松",
+        raceDate: "比赛日期",
+        selectPlan: "选择计划",
+        getPDF: "获取PDF",
+        viewTrainingPlan: "查看训练计划",
+        pleaseSelect: "请选择周六或周日作为比赛日",
+        weeks: "周"
+      },
+      days: {
+        monday: "周一",
+        tuesday: "周二", 
+        wednesday: "周三",
+        thursday: "周四",
+        friday: "周五",
+        saturday: "周六",
+        sunday: "周日"
+      }
+    },
+    en: {
+      title: {
+        full: "Full Marathon",
+        half: "Half Marathon",
+        recovery: "Rest",
+        easyslow: "Easy Slow",
+        easyfast: "Easy Fast",
+        lsd: "LSD",
+        tempo: "MP",
+        strenght: "@MP-10",
+        ten: "10 KM",
+        five: "5 KM"
+      },
+      plan: {
+        beginner: "Beginner",
+        advanced: "Advanced",
+        warmUp: "Warm up",
+        coolDown: "Cool down",
+        raceDate: "Race Date",
+        selectPlan: "Select Plan",
+        getPDF: "Get PDF",
+        viewTrainingPlan: "View Training Plan",
+        pleaseSelect: "Please select Saturday or Sunday only",
+        weeks: "Weeks"
+      },
+      days: {
+        monday: "Monday",
+        tuesday: "Tuesday",
+        wednesday: "Wednesday", 
+        thursday: "Thursday",
+        friday: "Friday",
+        saturday: "Saturday",
+        sunday: "Sunday"
+      }
+    }
+  };
+
+  const t = texts[locale] || texts.zh;
+
   const [tableData, setTableData] = useState(data);
   const [showAll, setShowAll] = useState(true);
   const [selectedDataRow, setSelectedDataRow] = useState(null);
@@ -15,15 +90,15 @@ const DataTable = ({ data }) => {
   const [warm, setWarm] = useState('1.6');
   const [cold, setCold] = useState('1.6');
   const [loading, setLoading] = useState(false);
-  const [planType, setPlanType] = useState('Beginner');
+  const [planType, setPlanType] = useState('basic');
   const [raceDate, setRaceDate] = useState('');
   const [basicPlan, setBasicPlan] = useState([]);
   const [advancePlan, setAdvancePlan] = useState([]);
   const [planDates, setPlanDates] = useState({});
 
   const options = [
-    { value: 'basic', label: 'Beginner' },
-    { value: 'advance', label: 'Advanced' },
+    { value: 'basic', label: t.plan.beginner },
+    { value: 'advance', label: t.plan.advanced },
   ];
 
   useEffect(() => {
@@ -31,19 +106,20 @@ const DataTable = ({ data }) => {
   }, [data]);
 
   useEffect(() => {
-    // Load training plans
+    // Load training plans based on locale
+    const planSuffix = locale === 'zh' ? '-zh' : '';
     Promise.all([
-      fetch('/data/basicPlan.json').then(res => res.json()),
-      fetch('/data/advancePlan.json').then(res => res.json())
+      fetch(`/data/basicPlan${planSuffix}.json`).then(res => res.json()),
+      fetch(`/data/advancePlan${planSuffix}.json`).then(res => res.json())
     ]).then(([basic, advance]) => {
       setBasicPlan(basic);
       setAdvancePlan(advance);
       setSelectedPlanData(basic);
     }).catch(error => console.error('Error loading training plans:', error));
-  }, []);
+  }, [locale]);
 
   const selectOne = (value) => {
-    if (value === 'Beginner') {
+    if (value === 'basic') {
       setSelectedPlanData(basicPlan);
     } else {
       setSelectedPlanData(advancePlan);
@@ -232,7 +308,7 @@ const DataTable = ({ data }) => {
         
         // 获取当天训练内容
         let planData = basicPlan;
-        if (planType === 'Advanced') planData = advancePlan;
+        if (planType === t.plan.advanced) planData = advancePlan;
         
         const weekData = planData[weekIndex];
         const dayData = weekData?.schedule?.[dayIndex];
@@ -243,7 +319,7 @@ const DataTable = ({ data }) => {
         const isRestDay = type.toLowerCase() === 'rest';
         
         // 日期格式：月/日
-        const dateStr = currentDate.toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' });
+        const dateStr = currentDate.toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', { month: 'numeric', day: 'numeric' });
         
         if (isRaceWeek) {
           if (raceDay === 0 && dayIndex === 6) { // Race on Sunday
@@ -339,70 +415,70 @@ const DataTable = ({ data }) => {
 
   const paceColumns = [
     { 
-      title: <div style={{textAlign: 'center'}}>Full Marathon</div>,
+      title: <div style={{textAlign: 'center'}}>{t.title.full}</div>,
       dataIndex: 'full', 
       key: 'full',
       align: 'center',
       width: 140
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Half Marathon</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.half}</div>, 
       dataIndex: 'half', 
       key: 'half',
       align: 'center',
       width: 140
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Rest</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.recovery}</div>, 
       dataIndex: 'recovery', 
       key: 'recovery',
       align: 'center',
       width: 100
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Easy slow</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.easyslow}</div>, 
       dataIndex: 'easyslow', 
       key: 'easyslow',
       align: 'center',
       width: 140
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Easy fast</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.easyfast}</div>, 
       dataIndex: 'easyfast', 
       key: 'easyfast',
       align: 'center',
       width: 140
     },
     { 
-      title: <div style={{textAlign: 'center'}}>LSD</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.lsd}</div>, 
       dataIndex: 'lsd', 
       key: 'lsd',
       align: 'center',
       width: 140
     },
     { 
-      title: <div style={{textAlign: 'center'}}>MP</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.tempo}</div>, 
       dataIndex: 'tempo', 
       key: 'tempo',
       align: 'center',
       width: 140
     },
     { 
-      title: <div style={{textAlign: 'center'}}>@MP-10</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.strenght}</div>, 
       dataIndex: 'strenght', 
       key: 'strenght',
       align: 'center',
       width: 140
     },
     { 
-      title: <div style={{textAlign: 'center'}}>10 KM</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.ten}</div>, 
       dataIndex: 'ten', 
       key: 'ten',
       align: 'center',
       width: 140
     },
     { 
-      title: <div style={{textAlign: 'center'}}>5 KM</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.title.five}</div>, 
       dataIndex: 'five', 
       key: 'five',
       align: 'center',
@@ -419,7 +495,7 @@ const DataTable = ({ data }) => {
       align: 'center'
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Monday</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.days.monday}</div>, 
       key: 'monday', 
       width: 160,
       render: (record, _, index) => (
@@ -429,7 +505,7 @@ const DataTable = ({ data }) => {
       )
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Tuesday</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.days.tuesday}</div>, 
       key: 'tuesday', 
       width: 160,
       render: (record, _, index) => (
@@ -439,7 +515,7 @@ const DataTable = ({ data }) => {
       )
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Wednesday</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.days.wednesday}</div>, 
       key: 'wednesday', 
       width: 160,
       render: (record, _, index) => (
@@ -449,7 +525,7 @@ const DataTable = ({ data }) => {
       )
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Thursday</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.days.thursday}</div>, 
       key: 'thursday', 
       width: 160,
       render: (record, _, index) => (
@@ -459,7 +535,7 @@ const DataTable = ({ data }) => {
       )
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Friday</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.days.friday}</div>, 
       key: 'friday', 
       width: 160,
       render: (record, _, index) => (
@@ -469,7 +545,7 @@ const DataTable = ({ data }) => {
       )
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Saturday</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.days.saturday}</div>, 
       key: 'saturday', 
       width: 160,
       render: (record, _, index) => (
@@ -479,7 +555,7 @@ const DataTable = ({ data }) => {
       )
     },
     { 
-      title: <div style={{textAlign: 'center'}}>Sunday</div>, 
+      title: <div style={{textAlign: 'center'}}>{t.days.sunday}</div>, 
       key: 'sunday', 
       width: 160,
       render: (record, _, index) => (
@@ -531,27 +607,27 @@ const DataTable = ({ data }) => {
                 </Col>
                 <Col span={6}>
                   <div className="input-group">
-                    <label>Warm up</label>
+                    <label>{t.plan.warmUp}</label>
                     <Input
                       value={warm}
                       onChange={(e) => setWarm(e.target.value)}
-                      placeholder="Warm up"
+                      placeholder={t.plan.warmUp}
                     />
                   </div>
                 </Col>
                 <Col span={6}>
                   <div className="input-group">
-                    <label>Cool down</label>
+                    <label>{t.plan.coolDown}</label>
                     <Input
                       value={cold}
                       onChange={(e) => setCold(e.target.value)}
-                      placeholder="Cool down"
+                      placeholder={t.plan.coolDown}
                     />
                   </div>
                 </Col>
                 <Col span={6}>
                   <div className="input-group">
-                    <label>Race Date</label>
+                    <label>{t.plan.raceDate}</label>
                     <Input
                       type="date"
                       value={raceDate}
@@ -562,7 +638,7 @@ const DataTable = ({ data }) => {
                         const date = new Date(e.target.value);
                         const day = date.getDay();
                         if (e.target.value && day !== 0 && day !== 6) { // 0 = Sunday, 6 = Saturday
-                          alert('Please select Saturday or Sunday only');
+                          alert(t.plan.pleaseSelect);
                           setRaceDate('');
                         }
                       }}
@@ -605,7 +681,85 @@ const DataTable = ({ data }) => {
                 </div>
                 <Table
                   dataSource={selectedPlanData.slice(0, 9).map((item, index) => ({ ...item, key: index }))}
-                  columns={planColumns}
+                  columns={[
+                    { 
+                      title: '', 
+                      dataIndex: 'week', 
+                      key: 'week', 
+                      width: 60,
+                      align: 'center'
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.monday}</div>, 
+                      key: 'monday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 0, index)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.tuesday}</div>, 
+                      key: 'tuesday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 1, index)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.wednesday}</div>, 
+                      key: 'wednesday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 2, index)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.thursday}</div>, 
+                      key: 'thursday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 3, index)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.friday}</div>, 
+                      key: 'friday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 4, index)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.saturday}</div>, 
+                      key: 'saturday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 5, index)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.sunday}</div>, 
+                      key: 'sunday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 6, index)}
+                        </div>
+                      )
+                    },
+                  ]}
                   pagination={false}
                   bordered
                   size="middle"
@@ -627,7 +781,85 @@ const DataTable = ({ data }) => {
                 </div>
                 <Table
                   dataSource={selectedPlanData.slice(9).map((item, index) => ({ ...item, key: index + 9 }))}
-                  columns={planColumns}
+                  columns={[
+                    { 
+                      title: '', 
+                      dataIndex: 'week', 
+                      key: 'week', 
+                      width: 60,
+                      align: 'center'
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.monday}</div>, 
+                      key: 'monday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 0, index + 9)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.tuesday}</div>, 
+                      key: 'tuesday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 1, index + 9)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.wednesday}</div>, 
+                      key: 'wednesday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 2, index + 9)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.thursday}</div>, 
+                      key: 'thursday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 3, index + 9)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.friday}</div>, 
+                      key: 'friday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 4, index + 9)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.saturday}</div>, 
+                      key: 'saturday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 5, index + 9)}
+                        </div>
+                      )
+                    },
+                    { 
+                      title: <div style={{textAlign: 'center'}}>{t.days.sunday}</div>, 
+                      key: 'sunday', 
+                      width: 160,
+                      render: (record, _, index) => (
+                        <div className="plan-cell">
+                          {descriptionOfWeekDay(record, 6, index + 9)}
+                        </div>
+                      )
+                    },
+                  ]}
                   pagination={false}
                   bordered
                   size="middle"
@@ -641,7 +873,7 @@ const DataTable = ({ data }) => {
 
         <div className="text-center mt-8">
           <Button type="primary" size="large" onClick={handlePrint}>
-            Get PDF
+            {t.plan.getPDF}
           </Button>
         </div>
       </div>

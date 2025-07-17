@@ -294,56 +294,59 @@ export default async function LocalizedHome({ params }) {
         </div>
       </section>
 
-      {/* Classic Books Section - Only for Chinese locale */}
-      {locale === 'zh' && (
+      {/* Classic Books Section */}
+      {(locale === 'zh' || locale === 'en') && (
         <section className="py-16 bg-white dark:bg-gray-800">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                经典书箱
+                {locale === 'en' ? 'Classic Books' : '经典书箱'}
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300">
-                提升跑步表现的专业书籍推荐
+                {locale === 'en' ? 'Professional book recommendations to improve your running performance' : '提升跑步表现的专业书籍推荐'}
               </p>
             </div>
             
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl">
-              {/* 汉森马拉松训练法 */}
+              {/* 汉森马拉松训练法 / Hansons Marathon Method */}
               <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
                 <div className="flex gap-6">
                   <div className="w-32 h-44 flex-shrink-0">
                     <img 
-                      src="/images/books/hanson.jpg" 
-                      alt="汉森马拉松训练法"
+                      src={`/images/books/hanson${locale === 'en' ? '_en' : ''}.jpg`} 
+                      alt={locale === 'en' ? 'Hansons Marathon Method' : '汉森马拉松训练法'}
                       className="w-full h-full object-cover rounded-lg"
                     />
                   </div>
                   <div className="flex-1 flex flex-col">
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        汉森马拉松训练法
+                        {locale === 'en' ? 'Hansons Marathon Method' : '汉森马拉松训练法'}
                       </h3>
                       <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                        基于科学原理的马拉松训练系统，专为不同水平跑者设计的完整训练计划，帮助您在马拉松赛道上实现突破。
+                        {locale === 'en' 
+                          ? 'A scientifically-based marathon training system designed for runners of all levels, offering complete training plans to help you achieve breakthrough performances on race day.'
+                          : '基于科学原理的马拉松训练系统，专为不同水平跑者设计的完整训练计划，帮助您在马拉松赛道上实现突破。'
+                        }
                       </p>
                     </div>
                     <div className="space-y-2">
                       <div className="text-left">
                         <a 
-                          href="/plans/hanson"
+                          href={`/plans/hanson?lang=${locale}`}
                           className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium text-sm inline-flex items-center transition-colors"
                         >
-                          查看计划 →
+                          {locale === 'en' ? 'View Training Plan →' : '查看计划 →'}
                         </a>
                       </div>
                       <div className="text-left">
                         <a 
-                          href="https://book.douban.com/subject/26852290/"
+                          href={locale === 'en' ? 'https://book.douban.com/subject/11416098/' : 'https://book.douban.com/subject/26852290/'}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium text-sm inline-flex items-center transition-colors"
                         >
-                          查看详情 →
+                          {locale === 'en' ? 'View Details →' : '查看详情 →'}
                         </a>
                       </div>
                     </div>
@@ -351,33 +354,36 @@ export default async function LocalizedHome({ params }) {
                 </div>
               </div>
 
-              {/* 丹尼尔斯经典跑步训练法 */}
+              {/* 丹尼尔斯经典跑步训练法 / Daniels\' Running Formula */}
               <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
                 <div className="flex gap-6">
                   <div className="w-32 h-44 flex-shrink-0">
                     <img 
-                      src="/images/books/daniels.jpg" 
-                      alt="丹尼尔斯经典跑步训练法"
+                      src={`/images/books/daniels${locale === 'en' ? '_en' : ''}.jpg`} 
+                      alt={locale === 'en' ? 'Daniels\' Running Formula' : '丹尼尔斯经典跑步训练法'}
                       className="w-full h-full object-cover rounded-lg"
                     />
                   </div>
                   <div className="flex-1 flex flex-col">
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        丹尼尔斯经典跑步训练法
+                        {locale === 'en' ? 'Daniels\' Running Formula' : '丹尼尔斯经典跑步训练法'}
                       </h3>
                       <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                        世界著名运动生理学家杰克·丹尼尔斯的经典著作，详细阐述VDOT训练体系，为跑者提供科学的训练方法和配速指导。
+                        {locale === 'en'
+                          ? 'The classic work by world-renowned exercise physiologist Jack Daniels, detailing the VDOT training system to provide runners with scientific training methods and pace guidance.'
+                          : '世界著名运动生理学家杰克·丹尼尔斯的经典著作，详细阐述VDOT训练体系，为跑者提供科学的训练方法和配速指导。'
+                        }
                       </p>
                     </div>
                     <div className="text-right">
                       <a 
-                        href="https://book.douban.com/subject/25967933/"
+                        href={locale === 'en' ? 'https://book.douban.com/subject/35531345/' : 'https://book.douban.com/subject/25967933/'}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium text-sm inline-flex items-center transition-colors"
                       >
-                        查看详情 →
+                        {locale === 'en' ? 'View Details →' : '查看详情 →'}
                       </a>
                     </div>
                   </div>
