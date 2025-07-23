@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
+import RunningStats from "../../components/RunningStats";
 
 export default async function LocalizedHome({ params }) {
   const { locale } = await params;
@@ -227,6 +228,11 @@ export default async function LocalizedHome({ params }) {
           <div className="text-sm text-gray-500 dark:text-gray-400">
             {t.forAppleWatch}
           </div>
+        </div>
+
+        {/* Running Stats Component */}
+        <div className="max-w-md mx-auto">
+          <RunningStats locale={locale} />
         </div>
       </section>
 

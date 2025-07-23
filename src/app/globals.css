@@ -264,3 +264,19 @@ body {
   white-space: nowrap;
   min-width: 80px;
 }
+
+/* Running Stats Animation */
+@keyframes slideUpFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideUp {
+  animation: slideUpFromBottom 700ms ease-out;
+}

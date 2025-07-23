@@ -16,7 +16,8 @@
       "Bash(grep:*)",
       "Bash(node:*)",
       "Bash(python3:*)",
-      "Bash(jq:*)"
+      "Bash(jq:*)",
+      "Bash(pkill -f \"next dev\")"
     ],
     "deny": []
   }
