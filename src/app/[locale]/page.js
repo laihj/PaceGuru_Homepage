@@ -45,6 +45,18 @@ export default async function LocalizedHome({ params }) {
         analytics: {
           title: "Smart Analytics",
           description: "Whether you're training for your first 5K or chasing a marathon PR, get the insights you need to run smarter."
+        },
+        tools: {
+          title: "Running Tools",
+          description: "Multiple running calculators including pace calculator, VDOT calculator, and other essential running tools."
+        },
+        shoes: {
+          title: "Shoe Tracking",
+          description: "Record which running shoes you use for each run and track their mileage and usage history."
+        },
+        ai: {
+          title: "AI Support",
+          description: "Get AI-powered analysis and feedback on every run to help you improve your performance and technique."
         }
       }
     },
@@ -86,6 +98,18 @@ export default async function LocalizedHome({ params }) {
         analytics: {
           title: "智能分析",
           description: "无论您是在训练第一个5K还是追求马拉松个人最佳，都能获得更智能跑步所需的洞察。"
+        },
+        tools: {
+          title: "跑步小工具",
+          description: "多个跑步计算器，包括配速计算器、VDOT计算器等实用跑步工具。"
+        },
+        shoes: {
+          title: "跑鞋记录",
+          description: "记录每次跑步使用的跑鞋，追踪跑鞋里程和使用历史。"
+        },
+        ai: {
+          title: "AI支持",
+          description: "让AI评价你的每一次跑步，获得个性化的跑步分析和改进建议。"
         }
       }
     },
@@ -127,6 +151,18 @@ export default async function LocalizedHome({ params }) {
         analytics: {
           title: "スマート分析",
           description: "初めての5KトレーニングでもマラソンのPR追求でも、よりスマートに走るために必要な洞察を取得。"
+        },
+        tools: {
+          title: "ランニングツール",
+          description: "ペース計算機、VDOT計算機など、複数のランニング計算ツールを提供。"
+        },
+        shoes: {
+          title: "シューズ記録",
+          description: "各ランで使用したランニングシューズを記録し、走行距離と使用履歴を追跡。"
+        },
+        ai: {
+          title: "AIサポート",
+          description: "AIがあなたの毎回のランニングを評価し、パフォーマンス向上とテクニック改善のための個別フィードバックを提供。"
         }
       }
     }
@@ -288,6 +324,48 @@ export default async function LocalizedHome({ params }) {
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
                 {t.features.analytics.description}
+              </p>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-2xl">
+              <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                {t.features.tools.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {t.features.tools.description}
+              </p>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-2xl">
+              <div className="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-6 h-6 text-teal-600 dark:text-teal-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M2 18h20v2H2zM13.5 2.9l-.4.2-8.7 8.7c-.2.2-.3.5-.3.8v2.4c0 .6.4 1 1 1h2.4c.3 0 .6-.1.8-.3l8.7-8.7c.4-.4.4-1 0-1.4l-2.4-2.4c-.4-.4-1-.4-1.4 0L10.5 5.5c-.2.2-.2.5 0 .7s.5.2.7 0l2.7-2.7c.1-.1.3-.1.4 0l1.4 1.4c.1.1.1.3 0 .4l-8.7 8.7c-.1.1-.2.1-.3.1H5.4c-.1 0-.2-.1-.2-.2v-1.3c0-.1 0-.2.1-.3l8.7-8.7c.1-.1.3-.1.4 0l.7.7c.1.1.1.3 0 .4L12.8 7c-.2.2-.2.5 0 .7s.5.2.7 0l2.3-2.3c.4-.4.4-1 0-1.4l-.7-.7c-.4-.4-1-.4-1.4 0L5 12c-.6.6-1 1.4-1 2.2v2.6c0 1.1.9 2 2 2h2.6c.8 0 1.6-.3 2.2-1L19.5 9c.4-.4.4-1 0-1.4l-2.4-2.4c-.4-.4-1-.4-1.4 0L13.5 2.9z"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                {t.features.shoes.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {t.features.shoes.description}
+              </p>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-2xl">
+              <div className="w-12 h-12 bg-pink-100 dark:bg-pink-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-6 h-6 text-pink-600 dark:text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                {t.features.ai.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {t.features.ai.description}
               </p>
             </div>
           </div>
