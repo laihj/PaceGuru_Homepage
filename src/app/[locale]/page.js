@@ -230,10 +230,11 @@ export default async function LocalizedHome({ params }) {
           </div>
         </div>
 
-        {/* Running Stats Component */}
+        {/* Running Stats Component - 临时隐藏
         <div className="max-w-md mx-auto">
           <RunningStats locale={locale} />
         </div>
+        */}
       </section>
 
       {/* Features Section */}
