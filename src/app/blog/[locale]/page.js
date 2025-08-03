@@ -102,19 +102,19 @@ export default async function BlogLocale({ params }) {
   const t = texts[locale] || texts.en;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-[#8172AD]/10 to-[#8172AD]/20 dark:from-[#8172AD]/20 dark:to-[#8172AD]/30">
       {/* Navigation */}
       <nav className="absolute top-0 right-0 p-6">
         <div className="flex gap-6 items-center">
           <Link
             href={locale === 'en' ? '/' : `/${locale}`}
-            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+            className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] dark:hover:text-[#8172AD] font-medium transition-colors"
           >
             {t.home}
           </Link>
           <Link
             href={`/about/${locale}`}
-            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+            className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] dark:hover:text-[#8172AD] font-medium transition-colors"
           >
             {t.about}
           </Link>
@@ -152,7 +152,7 @@ export default async function BlogLocale({ params }) {
                   <div className="flex-1">
                     <Link 
                       href={`/blog/${locale}/${post.slug}`}
-                      className="text-2xl font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="text-2xl font-semibold text-gray-900 dark:text-white hover:text-[#8172AD] dark:hover:text-[#8172AD] transition-colors"
                     >
                       {post.frontmatter.title}
                     </Link>
@@ -175,7 +175,7 @@ export default async function BlogLocale({ params }) {
                 
                 <Link 
                   href={`/blog/${locale}/${post.slug}`}
-                  className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                  className="text-[#8172AD] dark:text-[#8172AD] hover:underline font-medium"
                 >
                   {t.readMore}
                 </Link>

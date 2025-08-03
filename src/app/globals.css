@@ -280,3 +280,22 @@ body {
 .animate-slideUp {
   animation: slideUpFromBottom 700ms ease-out;
 }
+
+/* Blog image responsive styling */
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .prose img {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
+  }
+  
+  /* Ensure images don't overflow on mobile */
+  .prose {
+    overflow-x: hidden;
+  }
+}

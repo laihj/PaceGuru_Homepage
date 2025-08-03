@@ -51,3 +51,7 @@ All static assets are in the `public/` directory and include SVG icons for Next.
 - ESLint is configured with Next.js recommended rules
 - The codebase follows standard Next.js App Router patterns
 - Components use modern React patterns with functional components and hooks
+
+## Tasks and Improvements
+
+- 8172AD paceguru 的link 和 手机展示blog时的上下颜色,改成这个

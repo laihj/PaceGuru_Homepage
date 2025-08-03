@@ -136,7 +136,7 @@ export default async function BlogPost({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-[#8172AD]/10 to-[#8172AD]/20 dark:from-gray-900 dark:to-gray-800">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -148,13 +148,13 @@ export default async function BlogPost({ params }) {
         <div className="flex gap-6 items-center">
           <Link
             href={locale === 'en' ? '/' : `/${locale}`}
-            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+            className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] font-medium transition-colors"
           >
             {t.home}
           </Link>
           <Link
             href={`/about/${locale}`}
-            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+            className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] font-medium transition-colors"
           >
             {t.about}
           </Link>
@@ -165,7 +165,7 @@ export default async function BlogPost({ params }) {
         <div className="mb-8">
           <Link 
             href={`/blog/${locale}`}
-            className="text-blue-600 dark:text-blue-400 hover:underline mb-4 inline-block"
+            className="text-[#8172AD] hover:underline mb-4 inline-block"
           >
             {t.backToBlog}
           </Link>
@@ -190,7 +190,7 @@ export default async function BlogPost({ params }) {
               </time>
               
               {post.frontmatter.category && (
-                <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full font-medium">
+                <span className="bg-[#8172AD]/10 text-[#8172AD] px-3 py-1 rounded-full font-medium">
                   {post.frontmatter.category}
                 </span>
               )}
@@ -207,12 +207,12 @@ export default async function BlogPost({ params }) {
                 h2: ({children}) => <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 mt-8">{children}</h2>,
                 h3: ({children}) => <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 mt-6">{children}</h3>,
                 p: ({children}) => <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{children}</p>,
-                a: ({href, children}) => <a href={href} className="text-blue-600 dark:text-blue-400 hover:underline">{children}</a>,
+                a: ({href, children}) => <a href={href} className="text-[#8172AD] hover:underline">{children}</a>,
                 ul: ({children}) => <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300">{children}</ul>,
                 ol: ({children}) => <ol className="list-decimal pl-6 mb-4 text-gray-700 dark:text-gray-300">{children}</ol>,
                 li: ({children}) => <li className="mb-2">{children}</li>,
                 blockquote: ({children}) => <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 dark:text-gray-400 my-4">{children}</blockquote>,
-                img: ({src, alt}) => <img src={src} alt={alt} className="max-w-full h-auto mx-auto block border border-gray-200 dark:border-gray-700 rounded-lg" style={{maxWidth: '600px'}} />,
+                img: ({src, alt}) => <img src={src} alt={alt} className="w-full max-w-full h-auto mx-auto block border border-gray-200 dark:border-gray-700 rounded-lg" />,
                 code: ({inline, children}) => inline 
                   ? <code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">{children}</code>
                   : <code className="block bg-gray-100 dark:bg-gray-700 p-4 rounded text-sm overflow-x-auto">{children}</code>
