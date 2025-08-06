@@ -80,3 +80,47 @@ export function getAvailableLocales(type) {
     return fs.statSync(itemPath).isDirectory();
   });
 }
+
+// Get previous and next posts for navigation
+export function getAdjacentPosts(type, locale, currentSlug) {
+  const posts = getPosts(type, locale);
+  const currentIndex = posts.findIndex(post => post.slug === currentSlug);
+  
+  if (currentIndex === -1) {
+    return { previousPost: null, nextPost: null };
+  }
+  
+  return {
+    previousPost: currentIndex > 0 ? posts[currentIndex - 1] : null,
+    nextPost: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null
+  };
+}
+
+// Get posts from the same day in previous years
+export function getPostsFromSameDayInPreviousYears(type, locale, currentSlug) {
+  const currentPost = getPostBySlug(type, locale, currentSlug);
+  if (!currentPost) {
+    return [];
+  }
+  
+  const currentDate = new Date(currentPost.frontmatter.date);
+  const currentMonth = currentDate.getMonth();
+  const currentDay = currentDate.getDate();
+  const currentYear = currentDate.getFullYear();
+  
+  const posts = getPosts(type, locale);
+  
+  return posts.filter(post => {
+    if (post.slug === currentSlug) return false; // Exclude current post
+    
+    const postDate = new Date(post.frontmatter.date);
+    const postMonth = postDate.getMonth();
+    const postDay = postDate.getDate();
+    const postYear = postDate.getFullYear();
+    
+    // Same month and day, but different year and previous year
+    return postMonth === currentMonth && 
+           postDay === currentDay && 
+           postYear < currentYear;
+  }).sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date)); // Sort by most recent first
+}

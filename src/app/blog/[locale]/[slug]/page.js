@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { getPostBySlug, getBlogPosts } from '../../../../lib/posts';
+import { getPostBySlug, getBlogPosts, getAdjacentPosts, getPostsFromSameDayInPreviousYears } from '../../../../lib/posts';
 import { notFound } from 'next/navigation';
+import BlogNavigation from '../../../../components/BlogNavigation';
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
@@ -75,6 +76,12 @@ export default async function BlogPost({ params }) {
   if (!post) {
     notFound();
   }
+
+  // Get adjacent posts for navigation
+  const { previousPost, nextPost } = getAdjacentPosts('blog', locale, slug);
+  
+  // Get posts from the same day in previous years
+  const relatedPosts = getPostsFromSameDayInPreviousYears('blog', locale, slug);
 
   // 本地化文本
   const texts = {
@@ -222,6 +229,15 @@ export default async function BlogPost({ params }) {
             </ReactMarkdown>
           </div>
         </div>
+
+        {/* Blog Navigation - Previous/Next and Related Posts */}
+        <BlogNavigation
+          locale={locale}
+          previousPost={previousPost}
+          nextPost={nextPost}
+          relatedPosts={relatedPosts}
+          texts={texts}
+        />
       </article>
     </div>
   );
