@@ -18,7 +18,8 @@
       "Bash(python3:*)",
       "Bash(jq:*)",
       "Bash(pkill -f \"next dev\")",
-      "Bash(rg:*)"
+      "Bash(rg:*)",
+      "Bash(chmod:*)"
     ],
     "deny": []
   }
