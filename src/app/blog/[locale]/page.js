@@ -44,7 +44,7 @@ export async function generateMetadata({ params }) {
       siteName: 'PaceGuru',
       images: [
         {
-          url: 'https://paceguru.app/pageguru.png',
+          url: 'https://paceguru.app/ograph.png',
           width: 1200,
           height: 630,
           alt: t.title,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: t.title,
       description: t.description,
-      images: ['https://paceguru.app/pageguru.png'],
+      images: ['https://paceguru.app/ograph.png'],
       creator: '@paceguru',
     },
     keywords: t.keywords,

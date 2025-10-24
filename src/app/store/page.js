@@ -1,7 +1,31 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Head from 'next/head';
+
+export const metadata = {
+  title: "PaceGuru - Your Running Companion",
+  description: "记录跑步数据，制定训练计划，突破个人最佳成绩",
+  openGraph: {
+    title: "PaceGuru",
+    description: "记录跑步数据，制定训练计划，突破个人最佳成绩",
+    url: 'https://paceguru.app/store',
+    type: 'website',
+    images: [
+      {
+        url: '/ograph.png',
+        width: 1200,
+        height: 630,
+        alt: 'PaceGuru - Running App',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "PaceGuru",
+    description: "记录跑步数据，制定训练计划，突破个人最佳成绩",
+    images: ['/ograph.png'],
+  },
+};
 
 export default function StorePage() {
   const [countdown, setCountdown] = useState(3);
@@ -23,24 +47,6 @@ export default function StorePage() {
   }, []);
 
   return (
-    <>
-      <Head>
-        <title>PaceGuru - Your Running Companion</title>
-        <meta name="description" content="记录跑步数据，制定训练计划，突破个人最佳成绩" />
-        
-        {/* Open Graph Metadata */}
-        <meta property="og:title" content="PaceGuru" />
-        <meta property="og:description" content="记录跑步数据，制定训练计划，突破个人最佳成绩" />
-        <meta property="og:image" content="/ograph.png" />
-        <meta property="og:url" content="https://paceguru.app/store" />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card Metadata */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="PaceGuru" />
-        <meta name="twitter:description" content="记录跑步数据，制定训练计划，突破个人最佳成绩" />
-        <meta name="twitter:image" content="/ograph.png" />
-      </Head>
       
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 text-center">
@@ -112,6 +118,5 @@ export default function StorePage() {
           </div>
         </div>
       </div>
-    </>
   );
 }

@@ -39,7 +39,7 @@ export const metadata = {
     siteName: 'PaceGuru',
     images: [
       {
-        url: '/pageguru.png',
+        url: '/ograph.png',
         width: 1200,
         height: 630,
         alt: 'PaceGuru - Apple Watch Running App',
@@ -52,7 +52,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: "PaceGuru - Your Ultimate Apple Watch Running Companion",
     description: "Unlock your best run with PaceGuru—your all-in-one running companion for Apple Watch. Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.",
-    images: ['/pageguru.png'],
+    images: ['/ograph.png'],
     creator: '@paceguru',
   },
   robots: {
@@ -69,7 +69,7 @@ export const metadata = {
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
-    apple: '/pageguru.png',
+    apple: '/ograph.png',
   },
   manifest: '/site.webmanifest',
 };

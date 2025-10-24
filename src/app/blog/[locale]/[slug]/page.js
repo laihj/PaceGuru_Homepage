@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
   const title = post.frontmatter.title;
   const description = post.frontmatter.excerpt || post.content.substring(0, 160).replace(/[#*`]/g, '').trim();
   const canonicalUrl = `https://paceguru.app/blog/${locale}/${slug}`;
-  const imageUrl = post.frontmatter.featuredImage || 'https://paceguru.app/pageguru.png';
+  const imageUrl = post.frontmatter.featuredImage || 'https://paceguru.app/ograph.png';
 
   return {
     title: `${title} - PaceGuru Blog`,
@@ -110,7 +110,7 @@ export default async function BlogPost({ params }) {
     '@type': 'BlogPosting',
     headline: post.frontmatter.title,
     description: post.frontmatter.excerpt || post.content.substring(0, 160).replace(/[#*`]/g, '').trim(),
-    image: post.frontmatter.featuredImage || 'https://paceguru.app/pageguru.png',
+    image: post.frontmatter.featuredImage || 'https://paceguru.app/ograph.png',
     datePublished: post.frontmatter.date,
     dateModified: post.frontmatter.date,
     author: {
@@ -124,7 +124,7 @@ export default async function BlogPost({ params }) {
       url: 'https://paceguru.app',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://paceguru.app/pageguru.png',
+        url: 'https://paceguru.app/ograph.png',
         width: 1200,
         height: 630,
       },
