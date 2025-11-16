@@ -219,7 +219,7 @@ export default async function BlogPost({ params }) {
                 ol: ({children}) => <ol className="list-decimal pl-6 mb-4 text-gray-700 dark:text-gray-300">{children}</ol>,
                 li: ({children}) => <li className="mb-2">{children}</li>,
                 blockquote: ({children}) => <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 dark:text-gray-400 my-4">{children}</blockquote>,
-                img: ({src, alt}) => <img src={src} alt={alt} className="w-full max-w-full h-auto mx-auto block border border-gray-200 dark:border-gray-700 rounded-lg" />,
+                img: ({src, alt}) => <img src={src} alt={alt} className="w-4/5 max-w-full h-auto mx-auto block border border-gray-200 dark:border-gray-700 rounded-lg" />,
                 code: ({inline, children}) => inline 
                   ? <code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">{children}</code>
                   : <code className="block bg-gray-100 dark:bg-gray-700 p-4 rounded text-sm overflow-x-auto">{children}</code>

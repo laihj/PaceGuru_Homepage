@@ -19,7 +19,9 @@
       "Bash(jq:*)",
       "Bash(pkill -f \"next dev\")",
       "Bash(rg:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
