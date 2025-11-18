@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import { getPostBySlug, getBlogPosts, getAdjacentPosts, getPostsFromSameDayInPreviousYears } from '../../../../lib/posts';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../../../components/BlogNavigation';
+import AppStoreDownload from '../../../../components/AppStoreDownload';
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
@@ -227,6 +228,11 @@ export default async function BlogPost({ params }) {
             >
               {post.content}
             </ReactMarkdown>
+          </div>
+
+          {/* App Store Download CTA */}
+          <div className="px-8 pb-8 not-prose">
+            <AppStoreDownload locale={locale} className="mt-8" />
           </div>
         </div>
 
