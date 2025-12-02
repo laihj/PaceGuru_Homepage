@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
 import RunningStats from "../../components/RunningStats";
+import QandA from "../../components/QandA";
 
 export default async function LocalizedHome({ params }) {
   const { locale } = await params;
@@ -378,6 +379,9 @@ export default async function LocalizedHome({ params }) {
           </div>
         </div>
       </section>
+
+      {/* Q&A Section */}
+      <QandA locale={locale} />
 
       {/* Classic Books Section */}
       {(locale === 'zh' || locale === 'en') && (
