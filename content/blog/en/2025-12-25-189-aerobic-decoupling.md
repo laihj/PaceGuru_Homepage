@@ -18,7 +18,7 @@ This phenomenon of "drifting apart" is aerobic decoupling. Generally speaking, t
 
 We select running records over one hour with relatively stable pace throughout, using a sophisticated algorithm to reveal your true fitness state. Since we're calculating heart rate drift, the smaller the pace variation, the better — if pace changes too much, the reference value of this data decreases, so we mark it as "for entertainment only."
 
-![](/blog/zh/images/189/aero_entry.png)
+![](/blog/en/images/189/aero_entry.png)
 
 In PaceGuru, we've provided two entry points for this feature: one is the Aerobic Fitness Analysis tool in running tools where you can select qualifying running data, and another is on the training detail page where qualifying records will show an Aerobic Fitness Analysis button.
 
@@ -36,7 +36,7 @@ To make the data clear at a glance, PaceGuru combines your aerobic ability and e
 
 Below are actual scores from two of my 100-minute runs from different weeks. You can see how different stability and pace affect the running ability score.
 
-![](/blog/zh/images/189/aero_lsd.png)
+![](/blog/en/images/189/areo_lsd.png)
 
 ## What Does This Mean For You?
 
