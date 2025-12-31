@@ -1,4 +1,8 @@
-export default function AppStoreDownload({ locale, className = "" }) {
+'use client';
+
+import { useMemo } from 'react';
+
+export default function AppStoreDownload({ locale, className = "", campaignSource = "website" }) {
   const texts = {
     en: {
       downloadApp: "Download on App Store",
@@ -16,10 +20,23 @@ export default function AppStoreDownload({ locale, className = "" }) {
 
   const t = texts[locale] || texts.en;
 
+  // 构建带追踪参数的 App Store 链接
+  const appStoreUrl = useMemo(() => {
+    const baseUrl = "https://apps.apple.com/us/app/paceguru/id6468926049";
+    const url = new URL(baseUrl);
+
+    // App Store Affiliate Tracking Parameters
+    url.searchParams.set('pt', '123456789'); // Partner token (需要替换为实际的)
+    url.searchParams.set('ct', campaignSource); // Campaign token (来源标识)
+    url.searchParams.set('mt', '8'); // Media type (8 = Website)
+
+    return url.toString();
+  }, [campaignSource]);
+
   return (
     <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center ${className}`}>
       <a
-        href="https://apps.apple.com/us/app/paceguru/id6468926049"
+        href={appStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-800 transition-colors shadow-lg flex items-center gap-2 min-w-48"

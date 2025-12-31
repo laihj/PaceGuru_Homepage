@@ -20,7 +20,25 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // 替换为你的 App Store 链接
-            const appStoreUrl = "https://apps.apple.com/us/app/paceguru/id6468926049";
+            let appStoreUrl = "https://apps.apple.com/us/app/paceguru/id6468926049";
+
+            // 获取 referrer 信息
+            const referrer = document.referrer || 'direct';
+            const currentUrl = window.location.href;
+
+            // 构建追踪参数
+            const url = new URL(appStoreUrl);
+            url.searchParams.set('pt', '123456789'); // Affiliate token (如果有)
+            url.searchParams.set('ct', referrer); // Campaign token (referrer 信息)
+            url.searchParams.set('mt', '8'); // Media type (8 = Website)
+
+            // 如果 URL 本身有参数,也传递过去
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.forEach((value, key) => {
+                url.searchParams.set(key, value);
+            });
+
+            appStoreUrl = url.toString();
 
             // 延迟 3 秒跳转（可调节时间）
             setTimeout(() => {
