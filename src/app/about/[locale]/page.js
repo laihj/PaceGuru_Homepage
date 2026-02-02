@@ -109,7 +109,7 @@ export default async function AboutLocale({ params }) {
         </div>
       </nav>
 
-      <article className="max-w-4xl mx-auto px-4 py-20">
+      <main className="max-w-4xl mx-auto px-4 py-20">
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
           <div className="prose prose-lg dark:prose-invert max-w-none p-8">
             <ReactMarkdown 
@@ -135,7 +135,7 @@ export default async function AboutLocale({ params }) {
             </ReactMarkdown>
           </div>
         </div>
-      </article>
+      </main>
     </div>
   );
 }

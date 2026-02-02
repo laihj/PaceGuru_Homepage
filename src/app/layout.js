@@ -14,7 +14,7 @@ const geistMono = localFont({
 
 export const metadata = {
   title: "PaceGuru - Your Ultimate Apple Watch Running Companion",
-  description: "PaceGuru is your all-in-one running companion for Apple Watch. Sync, analyze, and improve your running performance with personalized training plans, pace tracking, and AI-powered insights.",
+  description: "PaceGuru is your all-in-one running companion for Apple Watch. Sync, analyze, and improve your running performance with AI-powered insights.",
   keywords: "Apple Watch running app, running tracker, pace analysis, heart rate zones, running companion, fitness app, marathon training, 5K training, running performance, Apple Watch sync",
   authors: [{ name: "PaceGuru Team" }],
   creator: "PaceGuru",

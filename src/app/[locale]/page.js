@@ -194,7 +194,8 @@ export default async function LocalizedHome({ params }) {
       </nav>
 
       {/* Hero Section */}
-      <section className="px-4 pt-20 pb-16 text-center max-w-4xl mx-auto">
+      <main>
+        <section className="px-4 pt-20 pb-16 text-center max-w-4xl mx-auto">
         <div className="mb-8">
           <div className="mb-6 flex justify-center">
             <Image
@@ -401,9 +402,11 @@ export default async function LocalizedHome({ params }) {
               <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
                 <div className="flex gap-6">
                   <div className="w-32 h-44 flex-shrink-0">
-                    <img 
-                      src={`/images/books/hanson${locale === 'en' ? '_en' : ''}.jpg`} 
+                    <img
+                      src={`/images/books/hanson${locale === 'en' ? '_en' : ''}.jpg`}
                       alt={locale === 'en' ? 'Hansons Marathon Method' : '汉森马拉松训练法'}
+                      width="128"
+                      height="176"
                       className="w-full h-full object-cover rounded-lg"
                     />
                   </div>
@@ -447,9 +450,11 @@ export default async function LocalizedHome({ params }) {
               <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-2xl shadow-lg">
                 <div className="flex gap-6">
                   <div className="w-32 h-44 flex-shrink-0">
-                    <img 
-                      src={`/images/books/daniels${locale === 'en' ? '_en' : ''}.jpg`} 
+                    <img
+                      src={`/images/books/daniels${locale === 'en' ? '_en' : ''}.jpg`}
                       alt={locale === 'en' ? 'Daniels\' Running Formula' : '丹尼尔斯经典跑步训练法'}
+                      width="128"
+                      height="176"
                       className="w-full h-full object-cover rounded-lg"
                     />
                   </div>
@@ -537,6 +542,7 @@ export default async function LocalizedHome({ params }) {
           </div>
         </div>
       </section>
+      </main>
     </div>
   );
 }

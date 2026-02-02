@@ -120,14 +120,7 @@ export default async function BlogPost({ params }) {
     '@type': 'BlogPosting',
     headline: post.frontmatter.title,
     description: post.frontmatter.excerpt || post.content.substring(0, 160).replace(/[#*`]/g, '').trim(),
-    image: [
-      {
-        '@type': 'ImageObject',
-        url: imageUrl,
-        width: 1200,
-        height: 630,
-      }
-    ],
+    image: imageUrl,
     datePublished: post.frontmatter.date,
     dateModified: post.frontmatter.date,
     author: {
@@ -193,9 +186,9 @@ export default async function BlogPost({ params }) {
         </div>
       </nav>
 
-      <article className="max-w-4xl mx-auto px-4 py-20">
+      <main className="max-w-4xl mx-auto px-4 py-20">
         <div className="mb-8">
-          <Link 
+          <Link
             href={`/blog/${locale}`}
             className="text-[#8172AD] hover:underline mb-4 inline-block"
           >
@@ -272,7 +265,7 @@ export default async function BlogPost({ params }) {
           relatedPosts={relatedPosts}
           texts={texts}
         />
-      </article>
+      </main>
     </div>
   );
 }

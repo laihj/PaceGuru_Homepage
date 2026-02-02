@@ -130,7 +130,7 @@ export default async function BlogLocale({ params }) {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-4 py-20">
+      <main className="max-w-4xl mx-auto px-4 py-20">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t.title}
@@ -191,7 +191,7 @@ export default async function BlogLocale({ params }) {
             ))}
           </div>
         )}
-      </div>
+      </main>
     </div>
   );
 }
