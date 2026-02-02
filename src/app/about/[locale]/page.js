@@ -10,18 +10,18 @@ export async function generateMetadata({ params }) {
   
   const texts = {
     en: {
-      title: 'About PaceGuru',
-      description: 'Learn about PaceGuru, the ultimate Apple Watch running companion app designed to help you track and improve your running performance.',
+      title: 'About PaceGuru - Apple Watch Running Companion App',
+      description: 'Learn about PaceGuru, the ultimate Apple Watch running companion. Discover how our smart data analysis and personalized training insights help runners improve performance.',
       keywords: 'about paceguru, apple watch running app, running tracker, fitness app'
     },
     zh: {
-      title: '关于 PaceGuru',
-      description: '了解 PaceGuru，专为 Apple Watch 设计的终极跑步伴侣应用，帮助您跟踪和提升跑步表现。',
+      title: '关于 PaceGuru - Apple Watch 跑步伴侣应用',
+      description: '了解 PaceGuru，专为 Apple Watch 设计的终极跑步伴侣。探索我们的智能数据分析和个性化训练见解如何帮助跑者提升表现。',
       keywords: '关于 paceguru, apple watch 跑步应用, 跑步追踪器, 健身应用'
     },
     ja: {
-      title: 'PaceGuru について',
-      description: 'ランニングパフォーマンスの追跡と向上を支援する、Apple Watch 向け究極のランニングコンパニオンアプリ PaceGuru について学びましょう。',
+      title: 'PaceGuru について - Apple Watch ランニングコンパニオンアプリ',
+      description: 'Apple Watch 向け究極のランニングコンパニオンアプリ PaceGuru について学びましょう。スマートデータ分析とパーソナライズされたトレーニングインサイトがランナーのパフォーマンス向上をどのように支援するかを発見。',
       keywords: 'paceguru について, apple watch ランニングアプリ, ランニングトラッカー, フィットネスアプリ'
     }
   };

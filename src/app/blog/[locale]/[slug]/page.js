@@ -105,13 +105,29 @@ export default async function BlogPost({ params }) {
 
   const t = texts[locale] || texts.en;
 
+  // Get full image URL for schema
+  const getImageUrl = (imgPath) => {
+    if (!imgPath) return 'https://paceguru.app/ograph.png';
+    if (imgPath.startsWith('http')) return imgPath;
+    return `https://paceguru.app${imgPath}`;
+  };
+
+  const imageUrl = getImageUrl(post.frontmatter.featuredImage);
+
   // Generate article schema JSON-LD
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.frontmatter.title,
     description: post.frontmatter.excerpt || post.content.substring(0, 160).replace(/[#*`]/g, '').trim(),
-    image: post.frontmatter.featuredImage || 'https://paceguru.app/ograph.png',
+    image: [
+      {
+        '@type': 'ImageObject',
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+      }
+    ],
     datePublished: post.frontmatter.date,
     dateModified: post.frontmatter.date,
     author: {
@@ -140,7 +156,7 @@ export default async function BlogPost({ params }) {
       'running app',
       'pace tracking',
       ...(post.frontmatter.tags || [])
-    ].join(', '),
+    ].filter(Boolean).join(', '),
   };
 
   return (
@@ -166,6 +182,14 @@ export default async function BlogPost({ params }) {
           >
             {t.about}
           </Link>
+          <a
+            href="https://www.laihjx.com/paceguru-privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+          >
+            {locale === 'en' ? 'Privacy' : locale === 'zh' ? '隐私' : 'プライバシー'}
+          </a>
         </div>
       </nav>
 
@@ -208,7 +232,7 @@ export default async function BlogPost({ params }) {
           <hr className="border-gray-200 dark:border-gray-700 mx-8" />
           
           <div className="prose prose-lg dark:prose-invert max-w-none p-8 pt-6">
-            <ReactMarkdown 
+            <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
                 h1: ({children}) => <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">{children}</h1>,
@@ -220,8 +244,12 @@ export default async function BlogPost({ params }) {
                 ol: ({children}) => <ol className="list-decimal pl-6 mb-4 text-gray-700 dark:text-gray-300">{children}</ol>,
                 li: ({children}) => <li className="mb-2">{children}</li>,
                 blockquote: ({children}) => <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 dark:text-gray-400 my-4">{children}</blockquote>,
-                img: ({src, alt}) => <img src={src} alt={alt} className="w-4/5 max-w-full h-auto mx-auto block border border-gray-200 dark:border-gray-700 rounded-lg" />,
-                code: ({inline, children}) => inline 
+                img: ({src, alt}) => {
+                  // Generate alt text from filename if missing
+                  const altText = alt || src?.split('/').pop()?.split('.')[0].replace(/[-_]/g, ' ') || 'PaceGuru running app screenshot';
+                  return <img src={src} alt={altText} className="w-4/5 max-w-full h-auto mx-auto block border border-gray-200 dark:border-gray-700 rounded-lg" loading="lazy" />;
+                },
+                code: ({inline, children}) => inline
                   ? <code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">{children}</code>
                   : <code className="block bg-gray-100 dark:bg-gray-700 p-4 rounded text-sm overflow-x-auto">{children}</code>
               }}

@@ -9,6 +9,7 @@ import remarkGfm from 'remark-gfm';
 import DataTable from './components/DataTable';
 // Simple language switcher for Hanson plan page
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const texts = {
   zh: {
@@ -140,6 +141,12 @@ function HansonPageContent() {
       <div className="min-h-screen bg-white">
         <nav className="absolute top-0 right-0 p-6">
           <div className="flex gap-4 items-center">
+            <Link
+              href="/"
+              className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] font-medium transition-colors"
+            >
+              {locale === 'zh' ? '首页' : 'Home'}
+            </Link>
             <button
               onClick={handleShowHelp}
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-1"

@@ -7,18 +7,18 @@ export async function generateMetadata({ params }) {
   
   const texts = {
     en: {
-      title: 'PaceGuru Blog',
-      description: 'Tips, tutorials, and insights for better running performance with Apple Watch.',
+      title: 'PaceGuru Running Blog - Apple Watch Training Tips',
+      description: 'Discover expert tips, tutorials, and insights to improve your running performance with Apple Watch. Get training advice, pace tracking guides, and fitness strategies.',
       keywords: 'Apple Watch running, running app, pace tracking, running tips, fitness blog'
     },
     zh: {
-      title: 'PaceGuru 博客',
-      description: '使用 Apple Watch 提升跑步表现的技巧、教程和见解。',
+      title: 'PaceGuru 跑步博客 - Apple Watch 训练技巧',
+      description: '探索使用 Apple Watch 提升跑步表现的专业技巧、教程和见解。获取训练建议、配速跟踪指南和健身策略。',
       keywords: 'Apple Watch 跑步, 跑步应用, 配速跟踪, 跑步技巧, 健身博客'
     },
     ja: {
-      title: 'PaceGuru ブログ',
-      description: 'Apple Watch を使ったより良いランニングパフォーマンスのためのヒント、チュートリアル、洞察。',
+      title: 'PaceGuru ランニングブログ - Apple Watch トレーニングのヒント',
+      description: 'Apple Watch を使用したランニングパフォーマンス向上のための専門的なヒント、チュートリアル、洞察を発見しましょう。トレーニングアドバイス、ペース追跡ガイド、フィットネス戦略を入手。',
       keywords: 'Apple Watch ランニング, ランニングアプリ, ペーストラッキング, ランニングヒント, フィットネスブログ'
     }
   };
@@ -118,6 +118,14 @@ export default async function BlogLocale({ params }) {
           >
             {t.about}
           </Link>
+          <a
+            href="https://www.laihjx.com/paceguru-privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+          >
+            {locale === 'en' ? 'Privacy' : locale === 'zh' ? '隐私' : 'プライバシー'}
+          </a>
           <LanguageSwitcher />
         </div>
       </nav>
