@@ -28,8 +28,9 @@ export const metadata = {
   alternates: {
     canonical: '/',
     languages: {
-      'en-US': '/en',
-      'ja-JP': '/ja',
+      'en': '/en',
+      'zh-CN': '/zh',
+      'ja': '/ja',
     },
   },
   openGraph: {
