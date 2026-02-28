@@ -25,7 +25,10 @@
       "WebFetch(domain:127.0.0.1)",
       "Edit",
       "Bash(git:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm run dev)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)"
     ],
     "deny": [],
     "ask": []
