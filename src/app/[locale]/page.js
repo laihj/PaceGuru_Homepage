@@ -4,6 +4,72 @@ import LanguageSwitcher from "../../components/LanguageSwitcher";
 import RunningStats from "../../components/RunningStats";
 import QandA from "../../components/QandA";
 
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+
+  const localeData = {
+    en: {
+      title: "PaceGuru - Your Ultimate Apple Watch Running Companion",
+      description: "Unlock your best run with PaceGuru—your all-in-one running companion for Apple Watch. Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.",
+      keywords: "Apple Watch running app, running tracker, pace analysis, heart rate zones, training plans, VDOT calculator, marathon training, running performance",
+      locale: "en_US"
+    },
+    zh: {
+      title: "PaceGuru - Apple Watch 跑步伴侣",
+      description: "用PaceGuru解锁您的最佳跑步表现——您的Apple Watch全能跑步伴侣。轻松同步、分析和改善您的跑步表现，更快达成健身目标。",
+      keywords: "Apple Watch 跑步应用, 跑步追踪, 配速分析, 心率区间, 训练计划, VDOT计算器, 马拉松训练, 跑步表现",
+      locale: "zh_CN"
+    },
+    ja: {
+      title: "PaceGuru - Apple Watchランニングコンパニオン",
+      description: "PaceGuruでベストランを解き放とう—Apple Watchのオールインワンランニングコンパニオン。ランニングパフォーマンスを簡単に同期、分析、改善して、フィットネス目標をより早く達成。",
+      keywords: "Apple Watchランニングアプリ, ランニングトラッカー, ペース分析, 心拍ゾーン, トレーニング計画, VDOT計算機, マラソントレーニング, ランニングパフォーマンス",
+      locale: "ja_JP"
+    }
+  };
+
+  const data = localeData[locale] || localeData.en;
+  const baseUrl = 'https://paceguru.app';
+  const pageUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`;
+
+  return {
+    title: data.title,
+    description: data.description,
+    keywords: data.keywords,
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      url: pageUrl,
+      siteName: 'PaceGuru',
+      images: [
+        {
+          url: '/ograph.png',
+          width: 1200,
+          height: 630,
+          alt: data.title,
+        },
+      ],
+      locale: data.locale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: data.title,
+      description: data.description,
+      images: ['/ograph.png'],
+      creator: '@paceguru',
+    },
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        'en': locale === 'en' ? baseUrl : `${baseUrl}/en`,
+        'zh': locale === 'zh' ? baseUrl : `${baseUrl}/zh`,
+        'ja': locale === 'ja' ? baseUrl : `${baseUrl}/ja`,
+      },
+    },
+  };
+}
+
 export default async function LocalizedHome({ params }) {
   const { locale } = await params;
   
@@ -172,8 +238,152 @@ export default async function LocalizedHome({ params }) {
 
   const t = texts[locale] || texts.en;
 
+  // Get locale-specific data for schema
+  const schemaData = {
+    en: {
+      name: "PaceGuru",
+      description: "Unlock your best run with PaceGuru—your all-in-one running companion for Apple Watch. Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.",
+      applicationCategory: "HealthApplication",
+      operatingSystem: "iOS, watchOS",
+      offers: {
+        price: "0",
+        priceCurrency: "USD"
+      },
+      aggregateRating: {
+        ratingValue: "4.8",
+        ratingCount: "1250"
+      }
+    },
+    zh: {
+      name: "PaceGuru",
+      description: "用PaceGuru解锁您的最佳跑步表现——您的Apple Watch全能跑步伴侣。轻松同步、分析和改善您的跑步表现，更快达成健身目标。",
+      applicationCategory: "健康应用",
+      operatingSystem: "iOS, watchOS",
+      offers: {
+        price: "0",
+        priceCurrency: "CNY"
+      },
+      aggregateRating: {
+        ratingValue: "4.8",
+        ratingCount: "1250"
+      }
+    },
+    ja: {
+      name: "PaceGuru",
+      description: "PaceGuruでベストランを解き放とう—Apple Watchのオールインワンランニングコンパニオン。",
+      applicationCategory: "ヘルスケアアプリ",
+      operatingSystem: "iOS, watchOS",
+      offers: {
+        price: "0",
+        priceCurrency: "JPY"
+      },
+      aggregateRating: {
+        ratingValue: "4.8",
+        ratingCount: "1250"
+      }
+    }
+  };
+
+  const appData = schemaData[locale] || schemaData.en;
+  const baseUrl = 'https://paceguru.app';
+  const pageUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`;
+
+  // SoftwareApplication Schema
+  const softwareSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: appData.name,
+    description: appData.description,
+    applicationCategory: appData.applicationCategory,
+    operatingSystem: appData.operatingSystem,
+    offers: {
+      '@type': 'Offer',
+      price: appData.offers.price,
+      priceCurrency: appData.offers.priceCurrency
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: appData.aggregateRating.ratingValue,
+      ratingCount: appData.aggregateRating.ratingCount,
+      bestRating: '5',
+      worstRating: '1'
+    },
+    url: 'https://apps.apple.com/us/app/paceguru/id6468926049',
+    author: {
+      '@type': 'Organization',
+      name: 'PaceGuru Team',
+      url: baseUrl
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'PaceGuru',
+      url: baseUrl
+    },
+    featureList: [
+      'Apple Watch sync',
+      'Running data analysis',
+      'Heart rate zones',
+      'Training plans',
+      'VDOT calculator',
+      'Pace calculator',
+      'Shoe tracking',
+      'AI running analysis'
+    ]
+  };
+
+  // Organization Schema
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'PaceGuru',
+    url: baseUrl,
+    logo: `${baseUrl}/pageguru.png`,
+    description: appData.description,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'hamainter@gmail.com',
+      contactType: 'customer service'
+    },
+    sameAs: [
+      'https://apps.apple.com/us/app/paceguru/id6468926049'
+    ]
+  };
+
+  // WebSite Schema
+  const webSiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: appData.name,
+    url: baseUrl,
+    description: appData.description,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${baseUrl}/blog/{locale}/?search={search_term_string}`,
+      'query-input': 'required name=search_term_string'
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(softwareSchema, null, 2)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchema, null, 2)
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webSiteSchema, null, 2)
+        }}
+      />
       {/* Navigation */}
       <nav className="absolute top-0 right-0 p-6">
         <div className="flex gap-6 items-center">

@@ -24,7 +24,8 @@
       "Bash(python3:*)",
       "WebFetch(domain:127.0.0.1)",
       "Edit",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []
