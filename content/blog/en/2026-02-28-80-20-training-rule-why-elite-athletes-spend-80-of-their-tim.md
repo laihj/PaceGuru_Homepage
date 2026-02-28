@@ -1,7 +1,10 @@
 ---
 title: "The 80/20 Training Rule: Why Elite Athletes Spend 80% of Their Time Jogging"
-date: "2026-02-28 09:20:56"
-tags: ['PaceGuru', 'Running', 'Training']
+date: 2026-02-28 09:41:38
+tags:
+  - "PaceGuru"
+  - "Running"
+  - "Training"
 ---
 
 
@@ -15,16 +18,16 @@ Norwegian sports physiologist Stephen Seiler conducted decades-long research on 
 
 **Top endurance athletes spend about 80% of their training time at low intensity, with only 20% dedicated to high-intensity training.**
 
-This is the famous **80/20 Training Rule**, also known as the "Polarized Training Model."
+This is the famous **80/20 Training Rule**, also known as the Polarized Training Model.
 
-## Why Do We Always Train Too "Fast"?
+## Why Do We Always Train Too Fast?
 
 Seiler's research reveals an interesting phenomenon: the training intensity distribution of recreational runners is vastly different from that of elite athletes.
 
 - **Elite athletes**: 77% low intensity, 3% moderate intensity, 20% high intensity
 - **Recreational runners**: 45.8% low intensity, 45.7% moderate intensity, 8.9% high intensity
 
-As you can see, recreational runners spend a significant amount of time in "moderate intensity"—that awkward zone that's neither easy enough to build an aerobic base nor hard enough to stimulate breakthroughs. This is called the "moderate-intensity trap."
+As you can see, recreational runners spend a significant amount of time in moderate intensity—that awkward zone that's neither easy enough to build an aerobic base nor hard enough to stimulate breakthroughs. This is called the moderate-intensity trap.
 
 ## Scientific Evidence: Why Does 80/20 Work?
 
@@ -46,11 +49,11 @@ This study assigned recreational runners to train with different intensity distr
 
 After synthesizing multiple studies, they confirmed that for improving VO2 max, time to exhaustion, and race times, **polarized training is superior to threshold and high-volume training**.
 
-## Physiological Mechanisms: Why Does "Slow" Make You Faster?
+## Physiological Mechanisms: Why Does Slow Make You Faster?
 
 ### What Does Low-Intensity Training (That 80%) Do?
 
-1. **Mitochondrial biogenesis**: Prolonged low-intensity exercise stimulates mitochondrial generation, increasing the number of cellular "power plants"
+1. **Mitochondrial biogenesis**: Prolonged low-intensity exercise stimulates mitochondrial generation, increasing the number of cellular power plants
 2. **Capillary expansion**: Promotes angiogenesis, improving oxygen and nutrient delivery efficiency
 3. **Fat oxidation capacity**: Enhances the body's ability to use fat as fuel, sparing glycogen reserves
 4. **Active recovery**: Promotes metabolic waste clearance and improves heart rate variability (HRV)
@@ -63,7 +66,7 @@ After synthesizing multiple studies, they confirmed that for improving VO2 max, 
 3. **Neuromuscular adaptation**: Improves running economy
 4. **Race-specific preparation**: Allows your body to adapt to race intensity
 
-### Why Is Moderate Intensity "Junk Miles"?
+### Why Is Moderate Intensity Junk Miles?
 
 The problem with moderate-intensity training (like continuous threshold runs) is:
 
@@ -71,7 +74,7 @@ The problem with moderate-intensity training (like continuous threshold runs) is
 - **Insufficient stimulus**: Not strong enough to trigger significant adaptive changes
 - **Inadequate recovery**: Affects the quality of the next training session
 
-As Dr. Seiler said in his TEDx talk: "NO PAIN, NO GAIN" is a misleading slogan. Overemphasizing moderate intensity leads to fatigue accumulation and inadequate recovery, which actually reduces performance.
+As Dr. Seiler said in his TEDx talk: NO PAIN, NO GAIN is a misleading slogan. Overemphasizing moderate intensity leads to fatigue accumulation and inadequate recovery, which actually reduces performance.
 
 ## How to Practice 80/20 in PaceGuru?
 
