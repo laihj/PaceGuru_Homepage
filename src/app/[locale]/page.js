@@ -10,19 +10,19 @@ export async function generateMetadata({ params }) {
   const localeData = {
     en: {
       title: "PaceGuru - Your Ultimate Apple Watch Running Companion",
-      description: "Unlock your best run with PaceGuru—your all-in-one running companion for Apple Watch. Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.",
+      description: "PaceGuru - Your Apple Watch running companion. Sync, analyze, and improve your running performance.",
       keywords: "Apple Watch running app, running tracker, pace analysis, heart rate zones, training plans, VDOT calculator, marathon training, running performance",
       locale: "en_US"
     },
     zh: {
       title: "PaceGuru - Apple Watch 跑步伴侣",
-      description: "用PaceGuru解锁您的最佳跑步表现——您的Apple Watch全能跑步伴侣。轻松同步、分析和改善您的跑步表现，更快达成健身目标。",
+      description: "PaceGuru - 您的 Apple Watch 跑步伴侣。同步、分析、提升跑步表现。",
       keywords: "Apple Watch 跑步应用, 跑步追踪, 配速分析, 心率区间, 训练计划, VDOT计算器, 马拉松训练, 跑步表现",
       locale: "zh_CN"
     },
     ja: {
       title: "PaceGuru - Apple Watchランニングコンパニオン",
-      description: "PaceGuruでベストランを解き放とう—Apple Watchのオールインワンランニングコンパニオン。ランニングパフォーマンスを簡単に同期、分析、改善して、フィットネス目標をより早く達成。",
+      description: "PaceGuru - あなたのApple Watchランニングコンパニオン。ランニングパフォーマンスを同期・分析・改善。",
       keywords: "Apple Watchランニングアプリ, ランニングトラッカー, ペース分析, 心拍ゾーン, トレーニング計画, VDOT計算機, マラソントレーニング, ランニングパフォーマンス",
       locale: "ja_JP"
     }
@@ -242,7 +242,7 @@ export default async function LocalizedHome({ params }) {
   const schemaData = {
     en: {
       name: "PaceGuru",
-      description: "Unlock your best run with PaceGuru—your all-in-one running companion for Apple Watch. Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.",
+      description: "PaceGuru - Your Apple Watch running companion. Sync, analyze, and improve your running performance.",
       applicationCategory: "HealthApplication",
       operatingSystem: "iOS, watchOS",
       offers: {
@@ -256,7 +256,7 @@ export default async function LocalizedHome({ params }) {
     },
     zh: {
       name: "PaceGuru",
-      description: "用PaceGuru解锁您的最佳跑步表现——您的Apple Watch全能跑步伴侣。轻松同步、分析和改善您的跑步表现，更快达成健身目标。",
+      description: "PaceGuru - 您的 Apple Watch 跑步伴侣。同步、分析、提升跑步表现。",
       applicationCategory: "健康应用",
       operatingSystem: "iOS, watchOS",
       offers: {
@@ -270,7 +270,7 @@ export default async function LocalizedHome({ params }) {
     },
     ja: {
       name: "PaceGuru",
-      description: "PaceGuruでベストランを解き放とう—Apple Watchのオールインワンランニングコンパニオン。",
+      description: "PaceGuru - あなたのApple Watchランニングコンパニオン。ランニングパフォーマンスを同期・分析・改善。",
       applicationCategory: "ヘルスケアアプリ",
       operatingSystem: "iOS, watchOS",
       offers: {

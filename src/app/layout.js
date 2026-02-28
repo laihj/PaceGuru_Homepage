@@ -35,7 +35,7 @@ export const metadata = {
   },
   openGraph: {
     title: "PaceGuru - Your Ultimate Apple Watch Running Companion",
-    description: "Unlock your best run with PaceGuru—your all-in-one running companion for Apple Watch. Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.",
+    description: "PaceGuru - Your Apple Watch running companion. Sync, analyze, and improve your running performance.",
     url: 'https://paceguru.app',
     siteName: 'PaceGuru',
     images: [
@@ -52,7 +52,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "PaceGuru - Your Ultimate Apple Watch Running Companion",
-    description: "Unlock your best run with PaceGuru—your all-in-one running companion for Apple Watch. Effortlessly sync, analyze, and improve your running performance to reach your fitness goals faster.",
+    description: "PaceGuru - Your Apple Watch running companion. Sync, analyze, and improve your running performance.",
     images: ['/ograph.png'],
     creator: '@paceguru',
   },

@@ -1,6 +1,6 @@
 ---
 title: "The 80/20 Training Rule: Why Elite Athletes Spend 80% of Their Time Jogging"
-date: 2026-02-28 09:41:38
+date: 2026-02-28 10:32:58
 tags:
   - "PaceGuru"
   - "Running"
@@ -74,9 +74,11 @@ The problem with moderate-intensity training (like continuous threshold runs) is
 - **Insufficient stimulus**: Not strong enough to trigger significant adaptive changes
 - **Inadequate recovery**: Affects the quality of the next training session
 
-As Dr. Seiler said in his TEDx talk: NO PAIN, NO GAIN is a misleading slogan. Overemphasizing moderate intensity leads to fatigue accumulation and inadequate recovery, which actually reduces performance.
+As Dr. Seiler said in his TEDx talk: NO PAIN NO GAIN is a misleading slogan. Overemphasizing moderate intensity leads to fatigue accumulation and inadequate recovery, which actually reduces performance.
 
 ## How to Practice 80/20 in PaceGuru?
+
+![/blog/en/images/20260228-1.png](/blog/en/images/20260228-1.png)
 
 PaceGuru's hexagonal ability radar chart is designed for this. You can:
 
