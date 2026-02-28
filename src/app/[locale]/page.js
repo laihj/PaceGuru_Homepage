@@ -63,7 +63,7 @@ export async function generateMetadata({ params }) {
       canonical: pageUrl,
       languages: {
         'en': locale === 'en' ? baseUrl : `${baseUrl}/en`,
-        'zh': locale === 'zh' ? baseUrl : `${baseUrl}/zh`,
+        'zh-CN': locale === 'zh' ? baseUrl : `${baseUrl}/zh`,
         'ja': locale === 'ja' ? baseUrl : `${baseUrl}/ja`,
       },
     },
