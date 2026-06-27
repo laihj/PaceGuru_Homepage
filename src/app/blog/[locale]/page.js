@@ -102,19 +102,19 @@ export default async function BlogLocale({ params }) {
   const t = texts[locale] || texts.en;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#8172AD]/10 to-[#8172AD]/20 dark:from-[#8172AD]/20 dark:to-[#8172AD]/30">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Navigation */}
-      <nav className="absolute top-0 right-0 p-6">
+      <nav className="absolute top-0 right-0 p-6 z-10">
         <div className="flex gap-6 items-center">
           <Link
             href={locale === 'en' ? '/' : `/${locale}`}
-            className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] dark:hover:text-[#8172AD] font-medium transition-colors"
+            className="text-gray-400 hover:text-white font-medium transition-colors text-sm"
           >
             {t.home}
           </Link>
           <Link
             href={`/about/${locale}`}
-            className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] dark:hover:text-[#8172AD] font-medium transition-colors"
+            className="text-gray-400 hover:text-white font-medium transition-colors text-sm"
           >
             {t.about}
           </Link>
@@ -122,7 +122,7 @@ export default async function BlogLocale({ params }) {
             href="https://www.laihjx.com/paceguru-privacy"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+            className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
           >
             {locale === 'en' ? 'Privacy' : locale === 'zh' ? '隐私' : 'プライバシー'}
           </a>
@@ -130,67 +130,72 @@ export default async function BlogLocale({ params }) {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-4 py-20">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <main className="max-w-4xl mx-auto px-4 py-28">
+        {/* Purple glow */}
+        <div className="absolute top-24 left-1/4 w-[500px] h-[500px] bg-[#8172AD]/15 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="relative mb-12">
+          <h1 className="text-5xl font-black text-white mb-4 tracking-tight">
             {t.title}
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+          <p className="text-xl text-gray-400">
             {t.subtitle}
           </p>
         </div>
 
-        {posts.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg text-center">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              {t.noPosts}
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              {t.noPostsDesc}
-            </p>
-          </div>
-        ) : (
-          <div className="grid gap-6">
-            {posts.map((post) => (
-              <article 
-                key={post.slug}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex-1">
-                    <Link 
-                      href={`/blog/${locale}/${post.slug}`}
-                      className="text-2xl font-semibold text-gray-900 dark:text-white hover:text-[#8172AD] dark:hover:text-[#8172AD] transition-colors"
-                    >
-                      {post.frontmatter.title}
-                    </Link>
-                    <div className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                      {new Date(post.frontmatter.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US')}
-                    </div>
-                  </div>
-                  {post.frontmatter.category && (
-                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">
-                      {post.frontmatter.category}
-                    </span>
-                  )}
-                </div>
-                
-                {post.frontmatter.excerpt && (
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {post.frontmatter.excerpt}
-                  </p>
-                )}
-                
-                <Link 
-                  href={`/blog/${locale}/${post.slug}`}
-                  className="text-[#8172AD] dark:text-[#8172AD] hover:underline font-medium"
+        <div className="relative">
+          {posts.length === 0 ? (
+            <div className="bg-white/5 border border-white/10 p-8 rounded-2xl text-center">
+              <h2 className="text-2xl font-semibold text-white mb-4">
+                {t.noPosts}
+              </h2>
+              <p className="text-gray-400">
+                {t.noPostsDesc}
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-6">
+              {posts.map((post) => (
+                <article
+                  key={post.slug}
+                  className="bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/[0.07] hover:border-white/20 transition-all"
                 >
-                  {t.readMore}
-                </Link>
-              </article>
-            ))}
-          </div>
-        )}
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex-1">
+                      <Link
+                        href={`/blog/${locale}/${post.slug}`}
+                        className="text-2xl font-semibold text-white hover:text-[#8172AD] transition-colors"
+                      >
+                        {post.frontmatter.title}
+                      </Link>
+                      <div className="text-sm text-gray-500 mt-2">
+                        {new Date(post.frontmatter.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US')}
+                      </div>
+                    </div>
+                    {post.frontmatter.category && (
+                      <span className="bg-[#8172AD]/20 text-[#8172AD] border border-[#8172AD]/30 px-3 py-1 rounded-full text-sm font-medium">
+                        {post.frontmatter.category}
+                      </span>
+                    )}
+                  </div>
+
+                  {post.frontmatter.excerpt && (
+                    <p className="text-gray-400 mb-4">
+                      {post.frontmatter.excerpt}
+                    </p>
+                  )}
+
+                  <Link
+                    href={`/blog/${locale}/${post.slug}`}
+                    className="text-[#8172AD] hover:underline font-medium"
+                  >
+                    {t.readMore}
+                  </Link>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );

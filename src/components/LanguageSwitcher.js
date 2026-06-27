@@ -65,7 +65,7 @@ export default function LanguageSwitcher() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors flex items-center gap-1"
+        className="text-gray-400 hover:text-white font-medium transition-colors flex items-center gap-1"
         aria-label="Change language"
       >
         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -86,16 +86,16 @@ export default function LanguageSwitcher() {
           />
           
           {/* Dropdown */}
-          <div className="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 z-20">
+          <div className="absolute right-0 mt-2 w-32 bg-gray-900 rounded-lg shadow-lg border border-white/10 z-20">
             {SUPPORTED_LOCALES.map((locale) => (
               <Link
                 key={locale}
                 href={buildNewUrl(locale)}
                 onClick={() => handleLanguageChange(locale)}
-                className={`block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg ${
-                  locale === currentLocale 
-                    ? 'bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-medium' 
-                    : 'text-gray-700 dark:text-gray-300'
+                className={`block px-4 py-2 text-sm hover:bg-white/5 transition-colors first:rounded-t-lg last:rounded-b-lg ${
+                  locale === currentLocale
+                    ? 'bg-[#8172AD]/20 text-[#8172AD] font-medium'
+                    : 'text-gray-300'
                 }`}
               >
                 {LOCALE_NAMES[locale]}

@@ -34,7 +34,7 @@ export default function BlogNavigation({
     <div className="mt-8 space-y-8">
       {/* Previous/Next Navigation */}
       {(previousPost || nextPost) && (
-        <div className="flex justify-between items-center p-6 bg-gray-50 dark:bg-gray-700 rounded-lg">
+        <div className="flex justify-between items-center p-6 bg-white/5 border border-white/10 rounded-lg">
           <div className="flex-1">
             {previousPost && (
               <Link
@@ -42,13 +42,13 @@ export default function BlogNavigation({
                 className="text-[#8172AD] hover:underline font-medium"
               >
                 {t.previousPost}
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                <div className="text-sm text-gray-400 mt-1">
                   {previousPost.frontmatter.title}
                 </div>
               </Link>
             )}
           </div>
-          
+
           <div className="flex-1 text-right">
             {nextPost && (
               <Link
@@ -56,7 +56,7 @@ export default function BlogNavigation({
                 className="text-[#8172AD] hover:underline font-medium"
               >
                 {t.nextPost}
-                <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                <div className="text-sm text-gray-400 mt-1">
                   {nextPost.frontmatter.title}
                 </div>
               </Link>
@@ -67,8 +67,8 @@ export default function BlogNavigation({
 
       {/* Related Posts from Same Day in Previous Years */}
       {relatedPosts && relatedPosts.length > 0 && (
-        <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="p-6 bg-white/5 border border-white/10 rounded-lg">
+          <h3 className="text-lg font-semibold text-white mb-4">
             {t.relatedPosts}
           </h3>
           <div className="space-y-3">
@@ -81,13 +81,13 @@ export default function BlogNavigation({
                   >
                     {post.frontmatter.title}
                   </Link>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="text-sm text-gray-400">
                     {new Date(post.frontmatter.date).toLocaleDateString(
                       locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US',
-                      { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
+                      {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
                       }
                     )}
                     {post.frontmatter.category && (

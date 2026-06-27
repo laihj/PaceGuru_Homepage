@@ -110,24 +110,24 @@ export default function QandA({ locale }) {
   const data = qaData[locale] || qaData.en;
 
   return (
-    <section className="py-16 bg-white dark:bg-gray-800">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+    <section className="py-16 px-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
             {data.title}
           </h2>
         </div>
 
-        <div className="bg-gray-50 dark:bg-gray-700 rounded-2xl p-8">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
           {data.features.map((feature, index) => (
-            <div key={index} className={index !== data.features.length - 1 ? 'mb-12 pb-12 border-b border-gray-200 dark:border-gray-600 last:mb-0 last:pb-0 last:border-b-0' : ''}>
+            <div key={index} className={index !== data.features.length - 1 ? 'mb-12 pb-12 border-b border-white/10' : ''}>
               <div className="flex items-start gap-4 mb-6">
                 <div className="text-4xl">{feature.icon}</div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-2xl font-bold text-white mb-3">
                     {feature.title}
                   </h3>
-                  <p className="text-lg text-gray-600 dark:text-gray-300">
+                  <p className="text-lg text-gray-400">
                     {feature.description}
                   </p>
                 </div>
@@ -136,10 +136,10 @@ export default function QandA({ locale }) {
               <div className="space-y-4 ml-12">
                 {feature.points.map((point, pointIndex) => (
                   <div key={pointIndex} className="flex gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 bg-[#8172AD]/10 rounded-full flex items-center justify-center mt-1">
+                    <div className="flex-shrink-0 w-6 h-6 bg-[#8172AD]/20 rounded-full flex items-center justify-center mt-1">
                       <div className="w-2 h-2 bg-[#8172AD] rounded-full"></div>
                     </div>
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed">
                       {point}
                     </p>
                   </div>

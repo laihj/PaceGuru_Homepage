@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { headers } from "next/headers";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -75,9 +76,21 @@ export const metadata = {
   manifest: '/site.webmanifest',
 };
 
-export default function RootLayout({ children }) {
+// lang 跟随 locale：改善 SEO/无障碍，避免 /zh /ja 页面 lang 仍为 en
+// 根 layout 无法拿到 [locale] 子段参数，通过 middleware 注入的 x-pathname 推断
+function langFromPath(pathname) {
+  if (!pathname) return 'en';
+  if (/(^|\/)zh(\/|$)/.test(pathname)) return 'zh-CN';
+  if (/(^|\/)ja(\/|$)/.test(pathname)) return 'ja';
+  return 'en';
+}
+
+export default async function RootLayout({ children }) {
+  const headersList = await headers();
+  const lang = langFromPath(headersList.get('x-pathname') || '');
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#8172AD" />

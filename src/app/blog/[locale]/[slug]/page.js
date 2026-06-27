@@ -5,6 +5,7 @@ import { getPostBySlug, getBlogPosts, getAdjacentPosts, getPostsFromSameDayInPre
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../../../components/BlogNavigation';
 import AppStoreDownload from '../../../../components/AppStoreDownload';
+import LanguageSwitcher from '../../../../components/LanguageSwitcher';
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
@@ -153,7 +154,7 @@ export default async function BlogPost({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#8172AD]/10 to-[#8172AD]/20 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -161,17 +162,17 @@ export default async function BlogPost({ params }) {
         }}
       />
       {/* Navigation */}
-      <nav className="absolute top-0 right-0 p-6">
+      <nav className="absolute top-0 right-0 p-6 z-10">
         <div className="flex gap-6 items-center">
           <Link
             href={locale === 'en' ? '/' : `/${locale}`}
-            className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] font-medium transition-colors"
+            className="text-gray-400 hover:text-white font-medium transition-colors text-sm"
           >
             {t.home}
           </Link>
           <Link
             href={`/about/${locale}`}
-            className="text-gray-700 dark:text-gray-300 hover:text-[#8172AD] font-medium transition-colors"
+            className="text-gray-400 hover:text-white font-medium transition-colors text-sm"
           >
             {t.about}
           </Link>
@@ -179,14 +180,18 @@ export default async function BlogPost({ params }) {
             href="https://www.laihjx.com/paceguru-privacy"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+            className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
           >
             {locale === 'en' ? 'Privacy' : locale === 'zh' ? '隐私' : 'プライバシー'}
           </a>
+          <LanguageSwitcher />
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-4 py-20">
+      {/* Purple glow */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[400px] bg-[#8172AD]/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <main className="relative max-w-4xl mx-auto px-4 py-28">
         <div className="mb-8">
           <Link
             href={`/blog/${locale}`}
@@ -195,56 +200,59 @@ export default async function BlogPost({ params }) {
             {t.backToBlog}
           </Link>
         </div>
-        
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+
+        <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
           <header className="p-8 pb-6">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl font-black text-white mb-4 tracking-tight">
               {post.frontmatter.title}
             </h1>
-            
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
               <time dateTime={post.frontmatter.date}>
                 {new Date(post.frontmatter.date).toLocaleDateString(
                   locale === 'zh' ? 'zh-CN' : locale === 'ja' ? 'ja-JP' : 'en-US',
-                  { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
+                  {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                   }
                 )}
               </time>
-              
+
               {post.frontmatter.category && (
-                <span className="bg-[#8172AD]/10 text-[#8172AD] px-3 py-1 rounded-full font-medium">
+                <span className="bg-[#8172AD]/20 text-[#8172AD] border border-[#8172AD]/30 px-3 py-1 rounded-full font-medium">
                   {post.frontmatter.category}
                 </span>
               )}
             </div>
           </header>
-          
-          <hr className="border-gray-200 dark:border-gray-700 mx-8" />
-          
-          <div className="prose prose-lg dark:prose-invert max-w-none p-8 pt-6">
+
+          <hr className="border-white/10 mx-8" />
+
+          <div className="prose prose-lg prose-invert max-w-none p-8 pt-6">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
-                h1: ({children}) => <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">{children}</h1>,
-                h2: ({children}) => <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 mt-8">{children}</h2>,
-                h3: ({children}) => <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 mt-6">{children}</h3>,
-                p: ({children}) => <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{children}</p>,
+                h1: ({children}) => <h1 className="text-3xl font-bold text-white mb-6">{children}</h1>,
+                h2: ({children}) => <h2 className="text-2xl font-semibold text-white mb-4 mt-8">{children}</h2>,
+                h3: ({children}) => <h3 className="text-xl font-semibold text-white mb-3 mt-6">{children}</h3>,
+                p: ({children}) => <p className="text-gray-300 mb-4 leading-relaxed">{children}</p>,
                 a: ({href, children}) => <a href={href} className="text-[#8172AD] hover:underline">{children}</a>,
-                ul: ({children}) => <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300">{children}</ul>,
-                ol: ({children}) => <ol className="list-decimal pl-6 mb-4 text-gray-700 dark:text-gray-300">{children}</ol>,
+                ul: ({children}) => <ul className="list-disc pl-6 mb-4 text-gray-300">{children}</ul>,
+                ol: ({children}) => <ol className="list-decimal pl-6 mb-4 text-gray-300">{children}</ol>,
                 li: ({children}) => <li className="mb-2">{children}</li>,
-                blockquote: ({children}) => <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 dark:text-gray-400 my-4">{children}</blockquote>,
+                blockquote: ({children}) => <blockquote className="border-l-4 border-[#8172AD] pl-4 italic text-gray-400 my-4">{children}</blockquote>,
                 img: ({src, alt}) => {
-                  // Generate alt text from filename if missing
                   const altText = alt || src?.split('/').pop()?.split('.')[0].replace(/[-_]/g, ' ') || 'PaceGuru running app screenshot';
-                  return <img src={src} alt={altText} className="w-4/5 max-w-full h-auto mx-auto block border border-gray-200 dark:border-gray-700 rounded-lg" loading="lazy" />;
+                  return <img src={src} alt={altText} className="w-4/5 max-w-full h-auto mx-auto block border border-white/10 rounded-lg" loading="lazy" />;
                 },
                 code: ({inline, children}) => inline
-                  ? <code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">{children}</code>
-                  : <code className="block bg-gray-100 dark:bg-gray-700 p-4 rounded text-sm overflow-x-auto">{children}</code>
+                  ? <code className="bg-white/10 px-2 py-1 rounded text-sm">{children}</code>
+                  : <code className="block bg-white/10 p-4 rounded text-sm overflow-x-auto">{children}</code>,
+                table: ({children}) => <div className="overflow-x-auto my-6"><table className="min-w-full border border-white/10 text-gray-300">{children}</table></div>,
+                thead: ({children}) => <thead className="bg-white/5">{children}</thead>,
+                th: ({children}) => <th className="border border-white/10 px-4 py-2 text-left font-semibold text-white">{children}</th>,
+                td: ({children}) => <td className="border border-white/10 px-4 py-2">{children}</td>,
               }}
             >
               {post.content}
