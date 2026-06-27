@@ -28,7 +28,8 @@
       "Bash(npm run build:*)",
       "Bash(npm run dev)",
       "Bash(lsof:*)",
-      "Bash(xargs kill:*)"
+      "Bash(xargs kill:*)",
+      "Bash(npx skills:*)"
     ],
     "deny": [],
     "ask": []
