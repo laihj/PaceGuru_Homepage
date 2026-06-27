@@ -90,19 +90,19 @@ export default async function LocalizedHome({ params }) {
       showcaseTitle: "Everything You Need to Level Up",
       showcase: [
         {
-          tag: "Apple Watch",
-          title: "Seamless Sync,\nInstant Insights",
-          desc: "Import your Apple Watch running data automatically. See every split, pace zone, and heart rate beat visualized in seconds.",
+          tag: "Sync Charts",
+          title: "See how your heart\nresponds to every mile",
+          desc: "Pace and heart rate, perfectly synced on one timeline. Drag two cursors to spot the exact moment your effort spiked.",
         },
         {
-          tag: "AI Training",
-          title: "Plans Built\nAround You",
-          desc: "Get personalized training plans powered by proven methods like Hansons and Daniels. Sync directly to your Apple Watch and run with purpose.",
+          tag: "Smart Analytics",
+          title: "Train smart,\nstay consistent",
+          desc: "A balanced intensity radar and 30 days of runs — your training story at a glance, not buried in spreadsheets.",
         },
         {
-          tag: "Analytics",
-          title: "Data That\nDrives Results",
-          desc: "Track weekly mileage, monitor heart rate zones, and spot performance trends. Every run tells a story — PaceGuru helps you read it.",
+          tag: "Pro Plans",
+          title: "Carry a pro marathon\nplan on your wrist",
+          desc: "Hansons and Daniels' plans, 18 weeks of structured training synced straight to your Apple Watch.",
         },
       ],
       keyFeatures: "All Features",
@@ -160,19 +160,19 @@ export default async function LocalizedHome({ params }) {
       showcaseTitle: "全面提升，一步到位",
       showcase: [
         {
-          tag: "Apple Watch",
-          title: "无缝同步，\n即时洞察",
-          desc: "自动导入 Apple Watch 跑步数据，秒速可视化每段配速、心率区间，让数据为你所用。",
+          tag: "联动图表",
+          title: "看清每一次加速，\n心脏的回应",
+          desc: "配速与心率完美同步叠加，双游标精准捕捉强度变化的瞬间。",
         },
         {
-          tag: "AI 训练",
-          title: "专为你打造\n的训练计划",
-          desc: "基于汉森、丹尼尔斯等权威训练法，生成个性化计划。直接同步至 Apple Watch，每次跑步都有目的。",
+          tag: "智能分析",
+          title: "科学训练，\n持续进步",
+          desc: "强度均衡的六边形雷达图，加上 30 天跑步热力图 —— 你的训练故事一目了然。",
         },
         {
-          tag: "数据分析",
-          title: "数据驱动\n更好成绩",
-          desc: "追踪周跑量、监控心率区间、发现成绩趋势。每次跑步都在讲述故事，PaceGuru 帮你读懂它。",
+          tag: "专业计划",
+          title: "专业马拉松计划，\n戴在手腕上",
+          desc: "Hansons 与 Daniels' 训练体系，18 周结构化训练自动同步至 Apple Watch。",
         },
       ],
       keyFeatures: "全部功能",
@@ -230,19 +230,19 @@ export default async function LocalizedHome({ params }) {
       showcaseTitle: "レベルアップに必要なすべて",
       showcase: [
         {
-          tag: "Apple Watch",
-          title: "シームレスな同期、\n即座の洞察",
-          desc: "Apple Watchのランニングデータを自動インポート。ペースゾーン・心拍数を秒で可視化。",
+          tag: "連動チャート",
+          title: "加速のたびに、\n心臓の応えを見る",
+          desc: "ペースと心拍数を1つのタイムラインで完全同期。2本のカーソルで強度が跳ね上がった瞬間を正確に捉える。",
         },
         {
-          tag: "AIトレーニング",
-          title: "あなたのための\nプランを作成",
-          desc: "ハンソン・ダニエルズなど実績ある手法によるパーソナライズされたトレーニングプラン。Apple Watchに直接同期。",
+          tag: "スマート分析",
+          title: "賢く鍛え、\n継続する",
+          desc: "バランスの取れた強度レーダーと30日間のランニングヒートマップ。あなたのトレーニングストーリーを一目で。",
         },
         {
-          tag: "分析",
-          title: "結果を生む\nデータ分析",
-          desc: "週間走行距離・心拍ゾーン・パフォーマンストレンドを追跡。PaceGuruがあなたのランを読み解く。",
+          tag: "プロのプラン",
+          title: "プロのマラソン計画を\n手首に",
+          desc: "Hansons と Daniels' のメソッド。18週間の構造化されたトレーニングを Apple Watch に自動同期。",
         },
       ],
       keyFeatures: "全機能",
@@ -469,6 +469,9 @@ export default async function LocalizedHome({ params }) {
                   src={`/images/screenshots/${locale}/home.png`}
                   alt={t.heroTagline}
                   label={t.heroBadge}
+                  watchSrc={`/images/screenshots/${locale}/home-watch.png`}
+                  watchAlt={t.heroBadge}
+                  watchLabel={t.heroBadge}
                 />
               </div>
             </div>
@@ -502,8 +505,9 @@ export default async function LocalizedHome({ params }) {
 
             <div className="space-y-28">
               {(() => {
-                // showcase 三项顺序固定：Apple Watch / AI Training / Analytics
-                const shotKeys = ['sync', 'training', 'analytics'];
+                // showcase 三项顺序固定：Sync Charts / Smart Analytics / Pro Plans
+                const shotKeys = ['sync', 'analytics', 'training'];
+                // 只有 Pro Plans（training）旁边叠加 Apple Watch
                 return t.showcase.map((item, i) => (
                   <div
                     key={i}
@@ -528,6 +532,9 @@ export default async function LocalizedHome({ params }) {
                         src={`/images/screenshots/${locale}/${shotKeys[i]}.png`}
                         alt={`${item.title}`}
                         label={item.tag}
+                        watchSrc={shotKeys[i] === 'training' ? `/images/screenshots/${locale}/training-watch.png` : undefined}
+                        watchAlt={`${item.title} – Apple Watch`}
+                        watchLabel={item.tag}
                       />
                     </div>
                   </div>
