@@ -146,9 +146,9 @@ export default async function LocalizedHome({ params }) {
     },
     zh: {
       title: "PaceGuru",
-      heroTagline: "更智能训练，\n更快奔跑。",
-      heroSubtitle: "您的 Apple Watch 全能跑步伴侣。轻松同步、分析，实现跑步目标。",
-      heroBadge: "Apple Watch 和 iPhone",
+      heroTagline: "更聪明地训练，\n更快地奔跑。",
+      heroSubtitle: "Apple Watch 跑步搭档。数据同步、深度分析，目标一步到位。",
+      heroBadge: "Apple Watch · iPhone",
       downloadApp: "在 App Store 下载",
       freeLabel: "免费下载",
       statsRating: "App Store 评分",
@@ -161,18 +161,18 @@ export default async function LocalizedHome({ params }) {
       showcase: [
         {
           tag: "联动图表",
-          title: "看清每一次加速，\n心脏的回应",
-          desc: "配速与心率完美同步叠加，双游标精准捕捉强度变化的瞬间。",
+          title: "每一次加速，\n心率都看得见",
+          desc: "配速和心率叠在同一条时间轴上，拖动双游标，哪一刻强度骤增一清二楚。",
         },
         {
           tag: "智能分析",
-          title: "科学训练，\n持续进步",
-          desc: "强度均衡的六边形雷达图，加上 30 天跑步热力图 —— 你的训练故事一目了然。",
+          title: "练得科学，\n跑得长久",
+          desc: "六边形雷达看强度分布，30 天热力图看坚持。你的训练全貌，一眼看完。",
         },
         {
           tag: "专业计划",
-          title: "专业马拉松计划，\n戴在手腕上",
-          desc: "Hansons 与 Daniels' 训练体系，18 周结构化训练自动同步至 Apple Watch。",
+          title: "马拉松计划，\n戴在腕上",
+          desc: "内置 Hansons、Daniels' 经典训练法，18 周计划自动推送到 Apple Watch。",
         },
       ],
       keyFeatures: "全部功能",
