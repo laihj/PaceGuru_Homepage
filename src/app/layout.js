@@ -95,6 +95,12 @@ export default async function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#8172AD" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#8172AD" />
+        <script
+          defer
+          src="https://vibeloft.ai/telemetry/v1.js"
+          data-vl-product-id="11277e6e-55e0-4c59-bc42-e4c7a26ad39b"
+          data-vl-auth-key="vl_web.jbLErj3_HPn_mEmgNEzrHy_wq2FH_Yh2sGQgXcwxBT0"
+        ></script>
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QPCM0TN37F"></script>
         <script
