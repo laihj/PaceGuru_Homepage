@@ -2,6 +2,10 @@
 export const SUPPORTED_LOCALES = ['en', 'zh', 'ja'];
 export const DEFAULT_LOCALE = 'en';
 
+export function isSupportedLocale(locale) {
+  return SUPPORTED_LOCALES.includes(locale);
+}
+
 // 语言名称映射
 export const LOCALE_NAMES = {
   'en': 'English',

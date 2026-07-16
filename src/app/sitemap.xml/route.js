@@ -1,4 +1,4 @@
-import { getBlogPosts } from '../../lib/posts';
+import { getBlogPosts, getPostBySlug } from '../../lib/posts';
 import { getAboutContent } from '../../lib/about';
 
 export async function GET() {
@@ -23,7 +23,7 @@ export async function GET() {
   };
 
   // Helper function to add URLs to sitemap
-  const addUrl = (loc, lastmod, changefreq = 'weekly', priority = '0.8') => {
+  const addUrl = (loc, lastmod, changefreq = 'weekly', priority = '0.8', alternateUrls = {}) => {
     const formattedDate = formatDate(lastmod);
     sitemap += '  <url>\n';
     sitemap += `    <loc>${loc}</loc>\n`;
@@ -31,17 +31,26 @@ export async function GET() {
     sitemap += `    <changefreq>${changefreq}</changefreq>\n`;
     sitemap += `    <priority>${priority}</priority>\n`;
     
-    // Add hreflang alternatives
-    locales.forEach(locale => {
-      sitemap += `    <xhtml:link rel="alternate" hreflang="${locale}" href="${loc.includes('/about') ? `${baseUrl}/about/${locale}` : loc.includes('/blog') && !loc.endsWith('/blog') ? loc.replace(/\/blog\/[^/]+\//, `/blog/${locale}/`) : loc.replace(/\/[^/]*$/, `/${locale}`)}" />\n`;
+    Object.entries(alternateUrls).forEach(([locale, alternateUrl]) => {
+      sitemap += `    <xhtml:link rel="alternate" hreflang="${locale}" href="${alternateUrl}" />\n`;
     });
     sitemap += '  </url>\n';
   };
   
+  const homeAlternates = Object.fromEntries(
+    locales.map(locale => [locale, `${baseUrl}/${locale}`])
+  );
+  const aboutAlternates = Object.fromEntries(
+    locales.map(locale => [locale, `${baseUrl}/about/${locale}`])
+  );
+  const blogAlternates = Object.fromEntries(
+    locales.map(locale => [locale, `${baseUrl}/blog/${locale}`])
+  );
+
   // Add homepage URLs
   locales.forEach(locale => {
-    const homeUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`;
-    addUrl(homeUrl, new Date().toISOString().split('T')[0], 'daily', '1.0');
+    const homeUrl = `${baseUrl}/${locale}`;
+    addUrl(homeUrl, new Date().toISOString().split('T')[0], 'daily', '1.0', homeAlternates);
   });
   
   // Add about page URLs
@@ -49,7 +58,7 @@ export async function GET() {
     const aboutUrl = `${baseUrl}/about/${locale}`;
     const aboutContent = getAboutContent(locale);
     const lastmod = formatDate(aboutContent?.frontmatter?.date);
-    addUrl(aboutUrl, lastmod, 'monthly', '0.8');
+    addUrl(aboutUrl, lastmod, 'monthly', '0.8', aboutAlternates);
   });
   
   // Add blog listing URLs
@@ -58,7 +67,7 @@ export async function GET() {
     const posts = getBlogPosts(locale);
     const latestPost = posts[0];
     const lastmod = formatDate(latestPost?.frontmatter?.date);
-    addUrl(blogUrl, lastmod, 'weekly', '0.9');
+    addUrl(blogUrl, lastmod, 'weekly', '0.9', blogAlternates);
   });
   
   // Add individual blog post URLs
@@ -66,7 +75,12 @@ export async function GET() {
     const posts = getBlogPosts(locale);
     posts.forEach(post => {
       const postUrl = `${baseUrl}/blog/${locale}/${post.slug}`;
-      addUrl(postUrl, post.frontmatter.date, 'monthly', '0.7');
+      const postAlternates = Object.fromEntries(
+        locales
+          .filter(availableLocale => getPostBySlug('blog', availableLocale, post.slug))
+          .map(availableLocale => [availableLocale, `${baseUrl}/blog/${availableLocale}/${post.slug}`])
+      );
+      addUrl(postUrl, post.frontmatter.date, 'monthly', '0.7', postAlternates);
     });
   });
   

@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { SUPPORTED_LOCALES, LOCALE_NAMES, extractLocaleFromPath, setStoredLocale } from '../lib/i18n';
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({ availableLocales = SUPPORTED_LOCALES }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const currentLocale = extractLocaleFromPath(pathname);
@@ -16,49 +16,22 @@ export default function LanguageSwitcher() {
   };
 
   const buildNewUrl = (locale) => {
-    // 获取当前路径，移除语言前缀
-    let pathWithoutLocale = pathname;
-    
-    // 如果当前路径包含语言前缀，移除它
     const pathParts = pathname.split('/').filter(Boolean);
+    if ((pathParts[0] === 'blog' || pathParts[0] === 'about') && SUPPORTED_LOCALES.includes(pathParts[1])) {
+      const remainingPath = pathParts.slice(2).join('/');
+      return `/${pathParts[0]}/${locale}${remainingPath ? `/${remainingPath}` : ''}`;
+    }
+
     if (SUPPORTED_LOCALES.includes(pathParts[0])) {
-      pathWithoutLocale = '/' + pathParts.slice(1).join('/');
+      const remainingPath = pathParts.slice(1).join('/');
+      return `/${locale}${remainingPath ? `/${remainingPath}` : ''}`;
     }
-    
-    // 构建新的本地化URL
-    if (locale === 'en') {
-      // 英文使用无前缀路径，但对于 /blog 和 /about 需要添加 /en
-      if (pathWithoutLocale === '/blog') {
-        return `/blog/en`;
-      }
-      if (pathWithoutLocale.startsWith('/blog/') && pathParts.length >= 2 && SUPPORTED_LOCALES.includes(pathParts[1])) {
-        // 如果是 /blog/zh 这样的路径，替换为 /blog/en
-        return `/blog/en`;
-      }
-      if (pathWithoutLocale === '/about') {
-        return `/about/en`;
-      }
-      if (pathWithoutLocale.startsWith('/about/') && pathParts.length >= 2 && SUPPORTED_LOCALES.includes(pathParts[1])) {
-        return `/about/en`;
-      }
-      return pathWithoutLocale || '/';
-    } else {
-      // 其他语言使用前缀
-      if (pathWithoutLocale === '/blog') {
-        return `/blog/${locale}`;
-      }
-      if (pathWithoutLocale.startsWith('/blog/') && pathParts.length >= 2 && SUPPORTED_LOCALES.includes(pathParts[1])) {
-        // 如果是 /blog/en 这样的路径，替换为 /blog/locale
-        return `/blog/${locale}`;
-      }
-      if (pathWithoutLocale === '/about') {
-        return `/about/${locale}`;
-      }
-      if (pathWithoutLocale.startsWith('/about/') && pathParts.length >= 2 && SUPPORTED_LOCALES.includes(pathParts[1])) {
-        return `/about/${locale}`;
-      }
-      return `/${locale}${pathWithoutLocale}`;
+
+    if (pathname === '/blog' || pathname === '/about') {
+      return `${pathname}/${locale}`;
     }
+
+    return `/${locale}`;
   };
 
   return (
@@ -87,7 +60,7 @@ export default function LanguageSwitcher() {
           
           {/* Dropdown */}
           <div className="absolute right-0 mt-2 w-32 bg-gray-900 rounded-lg shadow-lg border border-white/10 z-20">
-            {SUPPORTED_LOCALES.map((locale) => (
+            {availableLocales.map((locale) => (
               <Link
                 key={locale}
                 href={buildNewUrl(locale)}

@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getAboutContent } from '../../../lib/about';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
+import { notFound } from 'next/navigation';
+import { isSupportedLocale } from '../../../lib/i18n';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
@@ -69,23 +71,15 @@ export async function generateMetadata({ params }) {
 
 export default async function AboutLocale({ params }) {
   const { locale } = await params;
+
+  if (!isSupportedLocale(locale)) {
+    notFound();
+  }
+
   const about = getAboutContent(locale);
   
   if (!about) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-white/5 border border-white/10 p-8 rounded-2xl text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">
-              About PaceGuru
-            </h1>
-            <p className="text-gray-400">
-              Content not found.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   return (

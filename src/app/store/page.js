@@ -34,7 +34,7 @@ export default function StorePage() {
 
           <div className="mb-8">
             <img
-              src="/screen.png"
+              src="/images/screenshots/zh/home.png"
               alt="PaceGuru Screenshot"
               className="w-full max-w-md mx-auto rounded-lg shadow-lg"
             />

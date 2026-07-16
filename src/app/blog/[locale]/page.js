@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { getBlogPosts } from '../../../lib/posts';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
+import { notFound } from 'next/navigation';
+import { isSupportedLocale } from '../../../lib/i18n';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
@@ -66,6 +68,11 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogLocale({ params }) {
   const { locale } = await params;
+
+  if (!isSupportedLocale(locale)) {
+    notFound();
+  }
+
   const posts = getBlogPosts(locale);
 
   // 本地化文本

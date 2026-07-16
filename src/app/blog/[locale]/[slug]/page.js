@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import BlogNavigation from '../../../../components/BlogNavigation';
 import AppStoreDownload from '../../../../components/AppStoreDownload';
 import LanguageSwitcher from '../../../../components/LanguageSwitcher';
+import { isSupportedLocale, SUPPORTED_LOCALES } from '../../../../lib/i18n';
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
@@ -22,17 +23,18 @@ export async function generateMetadata({ params }) {
   const description = post.frontmatter.excerpt || post.content.substring(0, 160).replace(/[#*`]/g, '').trim();
   const canonicalUrl = `https://paceguru.app/blog/${locale}/${slug}`;
   const imageUrl = post.frontmatter.featuredImage || 'https://paceguru.app/ograph.png';
+  const alternateLanguages = Object.fromEntries(
+    SUPPORTED_LOCALES
+      .filter(availableLocale => getPostBySlug('blog', availableLocale, slug))
+      .map(availableLocale => [availableLocale, `https://paceguru.app/blog/${availableLocale}/${slug}`])
+  );
 
   return {
     title: `${title} - PaceGuru Blog`,
     description: description,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `https://paceguru.app/blog/en/${slug}`,
-        'zh': `https://paceguru.app/blog/zh/${slug}`,
-        'ja': `https://paceguru.app/blog/ja/${slug}`,
-      },
+      languages: alternateLanguages,
     },
     openGraph: {
       title: title,
@@ -73,6 +75,11 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPost({ params }) {
   const { locale, slug } = await params;
+
+  if (!isSupportedLocale(locale)) {
+    notFound();
+  }
+
   const post = getPostBySlug('blog', locale, slug);
   
   if (!post) {
@@ -84,6 +91,9 @@ export default async function BlogPost({ params }) {
   
   // Get posts from the same day in previous years
   const relatedPosts = getPostsFromSameDayInPreviousYears('blog', locale, slug);
+  const availableLocales = SUPPORTED_LOCALES.filter((availableLocale) =>
+    getPostBySlug('blog', availableLocale, slug)
+  );
 
   // 本地化文本
   const texts = {
@@ -184,7 +194,7 @@ export default async function BlogPost({ params }) {
           >
             {locale === 'en' ? 'Privacy' : locale === 'zh' ? '隐私' : 'プライバシー'}
           </a>
-          <LanguageSwitcher />
+          <LanguageSwitcher availableLocales={availableLocales} />
         </div>
       </nav>
 
