@@ -1,6 +1,7 @@
 ---
 title: "The 80/20 Training Rule: Why Elite Athletes Spend 80% of Their Time Jogging"
 date: 2026-02-28 10:32:58
+topic: "running-intensity-recovery"
 tags:
   - "PaceGuru"
   - "Running"

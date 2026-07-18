@@ -1,4 +1,5 @@
 import React from 'react';
+import { absoluteUrl } from '../../../lib/site';
 
 // Generate metadata for Hanson plan page
 export async function generateMetadata({ searchParams }) {
@@ -23,7 +24,7 @@ export async function generateMetadata({ searchParams }) {
     openGraph: {
       title: t.title,
       description: t.description,
-      url: `https://paceguru.app/plans/hanson?lang=${lang}`,
+      url: `${absoluteUrl('/plans/hanson')}?lang=${lang}`,
       siteName: 'PaceGuru',
       type: 'website',
     },

@@ -3,6 +3,23 @@ import path from 'path';
 import matter from 'gray-matter';
 
 const contentDirectory = path.join(process.cwd(), 'content');
+const IGNORED_RELATION_TAGS = new Set(['paceguru']);
+
+function normalizeList(value) {
+  if (Array.isArray(value)) {
+    return value.map(item => String(item).trim()).filter(Boolean);
+  }
+
+  if (typeof value === 'string') {
+    return value.split(',').map(item => item.trim()).filter(Boolean);
+  }
+
+  return [];
+}
+
+function normalizeTerm(value) {
+  return String(value || '').trim().toLocaleLowerCase();
+}
 
 // Get all posts for a specific type (blog) and locale
 export function getPosts(type, locale = 'en') {
@@ -24,11 +41,13 @@ export function getPosts(type, locale = 'en') {
       return {
         slug: filename.replace(/\.md$/, ''),
         frontmatter: {
+          ...data,
           title: data.title || 'Untitled',
           date: data.date || new Date().toISOString(),
           excerpt: data.excerpt || '',
           category: data.category || 'general',
-          ...data
+          tags: normalizeList(data.tags),
+          related: normalizeList(data.related)
         },
         content
       };
@@ -52,11 +71,13 @@ export function getPostBySlug(type, locale, slug) {
   return {
     slug,
     frontmatter: {
+      ...data,
       title: data.title || 'Untitled',
       date: data.date || new Date().toISOString(),
       excerpt: data.excerpt || '',
       category: data.category || 'general',
-      ...data
+      tags: normalizeList(data.tags),
+      related: normalizeList(data.related)
     },
     content
   };
@@ -96,31 +117,47 @@ export function getAdjacentPosts(type, locale, currentSlug) {
   };
 }
 
-// Get posts from the same day in previous years
-export function getPostsFromSameDayInPreviousYears(type, locale, currentSlug) {
+// Get articles that share a manually curated link, topic, tags, or category.
+// This keeps related reading useful even when no post was published on the same date.
+export function getRelatedPosts(type, locale, currentSlug, limit = 3) {
   const currentPost = getPostBySlug(type, locale, currentSlug);
   if (!currentPost) {
     return [];
   }
-  
-  const currentDate = new Date(currentPost.frontmatter.date);
-  const currentMonth = currentDate.getMonth();
-  const currentDay = currentDate.getDate();
-  const currentYear = currentDate.getFullYear();
-  
+
+  const currentTopic = normalizeTerm(currentPost.frontmatter.topic);
+  const currentCategory = normalizeTerm(currentPost.frontmatter.category);
+  const currentTags = new Set(
+    normalizeList(currentPost.frontmatter.tags)
+      .map(normalizeTerm)
+      .filter(tag => !IGNORED_RELATION_TAGS.has(tag))
+  );
+  const manualRelated = new Set(normalizeList(currentPost.frontmatter.related));
   const posts = getPosts(type, locale);
-  
+
   return posts.filter(post => {
-    if (post.slug === currentSlug) return false; // Exclude current post
-    
-    const postDate = new Date(post.frontmatter.date);
-    const postMonth = postDate.getMonth();
-    const postDay = postDate.getDate();
-    const postYear = postDate.getFullYear();
-    
-    // Same month and day, but different year and previous year
-    return postMonth === currentMonth && 
-           postDay === currentDay && 
-           postYear < currentYear;
-  }).sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date)); // Sort by most recent first
+    return post.slug !== currentSlug;
+  }).map(post => {
+    const postTopic = normalizeTerm(post.frontmatter.topic);
+    const postCategory = normalizeTerm(post.frontmatter.category);
+    const postTags = normalizeList(post.frontmatter.tags)
+      .map(normalizeTerm)
+      .filter(tag => !IGNORED_RELATION_TAGS.has(tag));
+    const sharedTags = postTags.filter(tag => currentTags.has(tag)).length;
+    const manuallyRelated = manualRelated.has(post.slug);
+
+    let score = 0;
+    if (manuallyRelated) score += 100;
+    if (currentTopic && currentTopic === postTopic) score += 30;
+    score += sharedTags * 8;
+    if (currentCategory && currentCategory === postCategory) score += 3;
+
+    return { post, score };
+  }).filter(({ score }) => score > 0)
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return new Date(b.post.frontmatter.date) - new Date(a.post.frontmatter.date);
+    })
+    .slice(0, limit)
+    .map(({ post }) => post);
 }

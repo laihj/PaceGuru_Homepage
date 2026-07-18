@@ -5,6 +5,7 @@ import QandA from "../../components/QandA";
 import PhoneMockup from "../../components/PhoneMockup";
 import { notFound } from 'next/navigation';
 import { isSupportedLocale } from '../../lib/i18n';
+import { SITE_URL } from '../../lib/site';
 
 function AppStoreButton({ size = 'lg', label }) {
   return (
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }) {
   };
 
   const data = localeData[locale] || localeData.en;
-  const baseUrl = 'https://paceguru.app';
+  const baseUrl = SITE_URL;
   const pageUrl = `${baseUrl}/${locale}`;
 
   return {
@@ -338,7 +339,7 @@ export default async function LocalizedHome({ params }) {
   };
 
   const appData = schemaData[locale] || schemaData.en;
-  const baseUrl = 'https://paceguru.app';
+  const baseUrl = SITE_URL;
   const pageUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`;
 
   const softwareSchema = {

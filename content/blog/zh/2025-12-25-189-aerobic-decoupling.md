@@ -1,6 +1,7 @@
 ---
 title: PaceGuru 1.8.9：解密"有氧心率飘移"与"体能得分"算法
 date: 2025-12-25 10:00:00
+topic: "running-intensity-recovery"
 tags: [PaceGuru,算法]
 ---
 

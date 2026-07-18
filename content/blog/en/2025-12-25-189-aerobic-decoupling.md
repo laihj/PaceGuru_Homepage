@@ -1,6 +1,7 @@
 ---
 title: "PaceGuru 1.8.9: Aerobic Decoupling & Fitness Score"
 date: 2025-12-25 10:00:00
+topic: "running-intensity-recovery"
 tags: [PaceGuru,Algorithm]
 ---
 

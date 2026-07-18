@@ -3,6 +3,7 @@ import { getBlogPosts } from '../../../lib/posts';
 import LanguageSwitcher from '../../../components/LanguageSwitcher';
 import { notFound } from 'next/navigation';
 import { isSupportedLocale } from '../../../lib/i18n';
+import { absoluteUrl } from '../../../lib/site';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }) {
   };
 
   const t = texts[locale] || texts.en;
-  const canonicalUrl = `https://paceguru.app/blog/${locale}`;
+  const canonicalUrl = absoluteUrl(`/blog/${locale}`);
 
   return {
     title: t.title,
@@ -34,9 +35,9 @@ export async function generateMetadata({ params }) {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'en': 'https://paceguru.app/blog/en',
-        'zh': 'https://paceguru.app/blog/zh',
-        'ja': 'https://paceguru.app/blog/ja',
+        'en': absoluteUrl('/blog/en'),
+        'zh': absoluteUrl('/blog/zh'),
+        'ja': absoluteUrl('/blog/ja'),
       },
     },
     openGraph: {
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }) {
       siteName: 'PaceGuru',
       images: [
         {
-          url: 'https://paceguru.app/ograph.png',
+          url: absoluteUrl('/ograph.png'),
           width: 1200,
           height: 630,
           alt: t.title,
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: t.title,
       description: t.description,
-      images: ['https://paceguru.app/ograph.png'],
+      images: [absoluteUrl('/ograph.png')],
       creator: '@paceguru',
     },
     keywords: t.keywords,

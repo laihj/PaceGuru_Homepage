@@ -1,6 +1,7 @@
 ---
 title: 80/20 训练法则：为什么顶级运动员 80% 的时间都在慢跑？
 date: 2026-02-28 10:32:50
+topic: "running-intensity-recovery"
 tags:
   - "PaceGuru"
   - "跑步"

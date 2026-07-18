@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { getPostBySlug, getBlogPosts, getAdjacentPosts, getPostsFromSameDayInPreviousYears } from '../../../../lib/posts';
+import { getPostBySlug, getBlogPosts, getAdjacentPosts, getRelatedPosts } from '../../../../lib/posts';
 import { notFound } from 'next/navigation';
 import BlogNavigation from '../../../../components/BlogNavigation';
 import AppStoreDownload from '../../../../components/AppStoreDownload';
 import LanguageSwitcher from '../../../../components/LanguageSwitcher';
 import { isSupportedLocale, SUPPORTED_LOCALES } from '../../../../lib/i18n';
+import { SITE_URL, absoluteUrl } from '../../../../lib/site';
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
@@ -21,12 +22,12 @@ export async function generateMetadata({ params }) {
 
   const title = post.frontmatter.title;
   const description = post.frontmatter.excerpt || post.content.substring(0, 160).replace(/[#*`]/g, '').trim();
-  const canonicalUrl = `https://paceguru.app/blog/${locale}/${slug}`;
-  const imageUrl = post.frontmatter.featuredImage || 'https://paceguru.app/ograph.png';
+  const canonicalUrl = absoluteUrl(`/blog/${locale}/${slug}`);
+  const imageUrl = absoluteUrl(post.frontmatter.featuredImage || '/ograph.png');
   const alternateLanguages = Object.fromEntries(
     SUPPORTED_LOCALES
       .filter(availableLocale => getPostBySlug('blog', availableLocale, slug))
-      .map(availableLocale => [availableLocale, `https://paceguru.app/blog/${availableLocale}/${slug}`])
+      .map(availableLocale => [availableLocale, absoluteUrl(`/blog/${availableLocale}/${slug}`)])
   );
 
   return {
@@ -90,7 +91,7 @@ export default async function BlogPost({ params }) {
   const { previousPost, nextPost } = getAdjacentPosts('blog', locale, slug);
   
   // Get posts from the same day in previous years
-  const relatedPosts = getPostsFromSameDayInPreviousYears('blog', locale, slug);
+  const relatedPosts = getRelatedPosts('blog', locale, slug);
   const availableLocales = SUPPORTED_LOCALES.filter((availableLocale) =>
     getPostBySlug('blog', availableLocale, slug)
   );
@@ -118,9 +119,7 @@ export default async function BlogPost({ params }) {
 
   // Get full image URL for schema
   const getImageUrl = (imgPath) => {
-    if (!imgPath) return 'https://paceguru.app/ograph.png';
-    if (imgPath.startsWith('http')) return imgPath;
-    return `https://paceguru.app${imgPath}`;
+    return absoluteUrl(imgPath || '/ograph.png');
   };
 
   const imageUrl = getImageUrl(post.frontmatter.featuredImage);
@@ -137,22 +136,22 @@ export default async function BlogPost({ params }) {
     author: {
       '@type': 'Organization',
       name: 'PaceGuru Team',
-      url: 'https://paceguru.app',
+      url: SITE_URL,
     },
     publisher: {
       '@type': 'Organization',
       name: 'PaceGuru',
-      url: 'https://paceguru.app',
+      url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://paceguru.app/ograph.png',
+        url: absoluteUrl('/ograph.png'),
         width: 1200,
         height: 630,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://paceguru.app/blog/${locale}/${slug}`,
+      '@id': canonicalUrl,
     },
     articleSection: post.frontmatter.category || 'General',
     keywords: [

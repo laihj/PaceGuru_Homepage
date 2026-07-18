@@ -11,19 +11,19 @@ export default function BlogNavigation({
     en: {
       previousPost: '← Previous Post',
       nextPost: 'Next Post →',
-      relatedPosts: 'Posts from the Same Day in Previous Years',
+      relatedPosts: 'Related Reading',
       readMore: 'Read More'
     },
     zh: {
       previousPost: '← 上一篇',
       nextPost: '下一篇 →',
-      relatedPosts: '往年同日发布的文章',
+      relatedPosts: '相关阅读',
       readMore: '阅读更多'
     },
     ja: {
       previousPost: '← 前の投稿',
       nextPost: '次の投稿 →',
-      relatedPosts: '過去の同じ日の投稿',
+      relatedPosts: '関連記事',
       readMore: '続きを読む'
     }
   };
@@ -65,7 +65,7 @@ export default function BlogNavigation({
         </div>
       )}
 
-      {/* Related Posts from Same Day in Previous Years */}
+      {/* Related posts are selected by manual links, topic, tags, and category. */}
       {relatedPosts && relatedPosts.length > 0 && (
         <div className="p-6 bg-white/5 border border-white/10 rounded-lg">
           <h3 className="text-lg font-semibold text-white mb-4">

@@ -1,10 +1,12 @@
+import { absoluteUrl } from '../../lib/site';
+
 export const metadata = {
   title: "PaceGuru - Your Running Companion",
   description: "记录跑步数据，制定训练计划，突破个人最佳成绩",
   openGraph: {
     title: "PaceGuru",
     description: "记录跑步数据，制定训练计划，突破个人最佳成绩",
-    url: 'https://paceguru.app/store',
+    url: absoluteUrl('/store'),
     type: 'website',
     images: [
       {

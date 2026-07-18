@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next';
+import { absoluteUrl, SITE_URL } from '../lib/site';
 
 export default function robots() {
-  const baseUrl = 'https://paceguru.app';
-
   return {
     rules: [
       {
@@ -11,7 +10,7 @@ export default function robots() {
         disallow: ['/api/', '/admin/'],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: absoluteUrl('/sitemap.xml'),
+    host: SITE_URL,
   };
 }

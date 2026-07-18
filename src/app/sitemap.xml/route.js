@@ -1,8 +1,9 @@
 import { getBlogPosts, getPostBySlug } from '../../lib/posts';
 import { getAboutContent } from '../../lib/about';
+import { SITE_URL } from '../../lib/site';
 
 export async function GET() {
-  const baseUrl = 'https://paceguru.app';
+  const baseUrl = SITE_URL;
   const locales = ['en', 'zh', 'ja'];
   
   // Build the sitemap XML

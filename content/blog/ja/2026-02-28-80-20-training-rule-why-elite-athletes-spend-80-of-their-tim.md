@@ -1,6 +1,7 @@
 ---
 title: "80/20トレーニング法則：なぜエリートアスリートは80%の時間をジョギングに費やすのか"
 date: 2026-02-28 10:33:12
+topic: "running-intensity-recovery"
 tags:
   - "PaceGuru"
   - "ランニング"

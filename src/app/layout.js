@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import { headers } from "next/headers";
+import { SITE_URL } from "../lib/site";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -25,7 +26,7 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://paceguru.app'),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
     languages: {
@@ -37,7 +38,7 @@ export const metadata = {
   openGraph: {
     title: "PaceGuru - Your Ultimate Apple Watch Running Companion",
     description: "PaceGuru - Your Apple Watch running companion. Sync, analyze, and improve your running performance.",
-    url: 'https://paceguru.app',
+    url: SITE_URL,
     siteName: 'PaceGuru',
     images: [
       {

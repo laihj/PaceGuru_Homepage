@@ -3,6 +3,7 @@ title: "How Slow Should an Easy Run Be? Find Your Comfortable Range with Heart R
 date: 2026-07-17 09:00:00
 excerpt: "There is no universal easy-run pace. Read effort, heart rate, and pace together to find an intensity that fits your current condition."
 category: "Training"
+topic: "running-intensity-recovery"
 tags:
   - "Easy Runs"
   - "Heart Rate Training"
