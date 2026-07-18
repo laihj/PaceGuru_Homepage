@@ -118,9 +118,9 @@ export default async function LocalizedHome({ params }) {
           desc: "Pace and heart rate, perfectly synced on one timeline. Drag two cursors to spot the exact moment your effort spiked.",
         },
         {
-          tag: "Smart Analytics",
-          title: "Train smart,\nstay consistent",
-          desc: "A balanced intensity radar and 30 days of runs — your training story at a glance, not buried in spreadsheets.",
+          tag: "Run Insights",
+          title: "See what changed\nin every run",
+          desc: "PaceGuru highlights signals worth a closer look—like heart-rate drift—alongside your pace and training notes, so your next run starts with more context.",
         },
         {
           tag: "Pro Plans",
@@ -188,9 +188,9 @@ export default async function LocalizedHome({ params }) {
           desc: "把配速和心率放到同一条时间线上。拖动两个游标，就能找出强度上来的那一段。",
         },
         {
-          tag: "智能分析",
-          title: "不只记跑量，\n更看懂训练",
-          desc: "用强度雷达看训练是否均衡，用 30 天热力图看节奏有没有断。",
+          tag: "跑步洞察",
+          title: "看见这一跑，\n真正的变化",
+          desc: "详情页会标出值得留意的信号，例如配速稳定时的心率飘高；结合曲线和训练日志，下一次该怎么跑会更清楚。",
         },
         {
           tag: "训练计划",
@@ -258,9 +258,9 @@ export default async function LocalizedHome({ params }) {
           desc: "ペースと心拍数を1つのタイムラインで完全同期。2本のカーソルで強度が跳ね上がった瞬間を正確に捉える。",
         },
         {
-          tag: "スマート分析",
-          title: "賢く鍛え、\n継続する",
-          desc: "バランスの取れた強度レーダーと30日間のランニングヒートマップ。あなたのトレーニングストーリーを一目で。",
+          tag: "ランニングインサイト",
+          title: "一回のランで起きた\n変化が見えてくる",
+          desc: "ペースが安定しているのに心拍が上がる、といった見逃したくない変化をハイライト。グラフとトレーニングログを見ながら振り返れます。",
         },
         {
           tag: "プロのプラン",
@@ -514,10 +514,15 @@ export default async function LocalizedHome({ params }) {
 
             <div className="space-y-28">
               {(() => {
-                // showcase 三项顺序固定：Sync Charts / Smart Analytics / Pro Plans
+                // showcase 三项顺序固定：Sync Charts / Run Insights / Pro Plans
                 const shotKeys = ['sync', 'analytics', 'training'];
                 // 只有 Pro Plans（training）旁边叠加 Apple Watch
-                return t.showcase.map((item, i) => (
+                return t.showcase.map((item, i) => {
+                  // 日文尚未提供独立截图时，详情页洞察沿用英文截图。
+                  // 其他截图仍保留各语言自己的资源路径。
+                  const screenshotLocale = locale === 'ja' && shotKeys[i] === 'analytics' ? 'en' : locale;
+
+                  return (
                   <div
                     key={i}
                     className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${i % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}
@@ -538,7 +543,7 @@ export default async function LocalizedHome({ params }) {
                     {/* Mockup */}
                     <div className={`flex justify-center ${i % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
                       <PhoneMockup
-                        src={`/images/screenshots/${locale}/${shotKeys[i]}.png`}
+                        src={`/images/screenshots/${screenshotLocale}/${shotKeys[i]}.png`}
                         alt={`${item.title}`}
                         label={item.tag}
                         watchSrc={shotKeys[i] === 'training' ? `/images/screenshots/${locale}/training-watch.png` : undefined}
@@ -547,7 +552,8 @@ export default async function LocalizedHome({ params }) {
                       />
                     </div>
                   </div>
-                ));
+                  );
+                });
               })()}
             </div>
           </div>
