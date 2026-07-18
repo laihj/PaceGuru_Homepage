@@ -9,6 +9,10 @@ import { promisify } from 'node:util';
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const execFileAsync = promisify(execFile);
 
+function occurrences(text, value) {
+  return text.split(value).length - 1;
+}
+
 async function queryPosts(script) {
   const { stdout } = await execFileAsync(process.execPath, [
     '--experimental-default-type=module',
@@ -31,7 +35,7 @@ test('uses the registered production origin from one shared module', async () =>
   assert.match(site, /SITE_URL = 'https:\/\/paceguru\.app'/);
   assert.match(sitemap, /import \{ SITE_URL \} from '..\/..\/lib\/site'/);
   assert.match(robots, /absoluteUrl\('\/sitemap\.xml'\)/);
-  assert.match(blogPost, /canonicalUrl = absoluteUrl\(`/);
+  assert.equal(occurrences(blogPost, 'const canonicalUrl = absoluteUrl('), 2);
 });
 
 test('selects related posts by topic and ignores a shared brand tag', async () => {

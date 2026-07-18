@@ -87,6 +87,8 @@ export default async function BlogPost({ params }) {
     notFound();
   }
 
+  const canonicalUrl = absoluteUrl(`/blog/${locale}/${slug}`);
+
   // Get adjacent posts for navigation
   const { previousPost, nextPost } = getAdjacentPosts('blog', locale, slug);
   
