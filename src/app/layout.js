@@ -88,10 +88,13 @@ function langFromPath(pathname) {
 
 export default async function RootLayout({ children }) {
   const headersList = await headers();
-  const lang = langFromPath(headersList.get('x-pathname') || '');
+  const vdotLocale = headersList.get('x-vdot-locale');
+  const lang = headersList.get('x-vdot-site') === '1'
+    ? ({ en: 'en', ja: 'ja', zh: 'zh-CN' }[vdotLocale] || 'zh-CN')
+    : langFromPath(headersList.get('x-pathname') || '');
 
   return (
-    <html lang={lang}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#8172AD" />
