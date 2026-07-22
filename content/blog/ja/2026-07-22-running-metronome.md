@@ -39,13 +39,13 @@ tags:
 
 3歩ごとの設定は、意外と使いやすいものです。友人は、音が鳴るタイミングで着地する足だけ少し強く踏みがちだと言っていました。2歩ごとだと同じ側になりやすいですが、3歩ごとなら左右の足に順番に回ります。感覚的にも偏りが少なくなります。
 
-<!-- Screenshot to add: /blog/zh/images/metronome/metronome-settings.jpg -->
+![PaceGuruの目標ピッチとビートパターンを設定するランニング・メトロノーム画面](/blog/zh/images/metronome/metronome-settings.jpg)
 
 ## ホーム画面からすぐ開始
 
 再生ボタンはホーム画面の右上に置きました。走る前にランニングツールを開いて何画面も進む必要はありません。ホームで一度タップすれば始まります。
 
-<!-- Screenshot to add: /blog/zh/images/metronome/home-quick-start.jpg -->
+![PaceGuruホーム画面右上のランニング・メトロノーム開始ボタン](/blog/zh/images/metronome/home-quick-start.jpg)
 
 ## 音楽やポッドキャストと一緒に使う
 

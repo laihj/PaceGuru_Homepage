@@ -39,13 +39,13 @@ You can start the metronome from Running Tools and adjust a few things:
 
 The three-step pattern is easy to overlook. A friend told me that, when the beat lands, the foot touching the ground tends to hit a little harder. With a two-step pattern, that may always be the same side. With three steps, the beat moves between left and right, which can feel more even.
 
-<!-- Screenshot to add: /blog/zh/images/metronome/metronome-settings.jpg -->
+![PaceGuru running metronome settings for target cadence and beat pattern](/blog/zh/images/metronome/metronome-settings.jpg)
 
 ## Ready from the home screen
 
 The play button lives at the upper-right of the home screen. There is no need to open Running Tools and work through a few extra screens before a run—one tap starts it.
 
-<!-- Screenshot to add: /blog/zh/images/metronome/home-quick-start.jpg -->
+![PaceGuru home-screen shortcut for starting the running metronome](/blog/zh/images/metronome/home-quick-start.jpg)
 
 ## It sits underneath music or a podcast
 

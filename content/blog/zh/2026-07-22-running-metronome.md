@@ -39,13 +39,13 @@ tags:
 
 三步一拍是个容易被忽略的小选项。有朋友跟我说，节拍一响，他落地的那只脚会下意识踩得重一点。两步一拍时，重的总是同一侧；改成三步一拍，提示会在左右脚之间轮换，跑起来更均匀些。
 
-<!-- Screenshot to add: /blog/zh/images/metronome/metronome-settings.jpg -->
+![PaceGuru 跑步节拍器的目标步频与节拍模式设置](/blog/zh/images/metronome/metronome-settings.jpg)
 
 ## 首页就能启动
 
 播放按钮放在首页右上角。出门前不用再进跑步工具、翻几层设置；点一下就可以开始。
 
-<!-- Screenshot to add: /blog/zh/images/metronome/home-quick-start.jpg -->
+![PaceGuru 首页右上角的跑步节拍器快捷播放按钮](/blog/zh/images/metronome/home-quick-start.jpg)
 
 ## 和音乐、播客一起用会舒服一点
 
