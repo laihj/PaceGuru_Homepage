@@ -51,6 +51,7 @@ test('selects related posts by topic and ignores a shared brand tag', async () =
   assert.deepEqual(posts, [
     '2026-02-28-80-20-training-rule-why-elite-athletes-spend-80-of-their-tim',
     '2025-12-25-189-aerobic-decoupling',
+    '2026-07-22-running-metronome',
   ]);
 });
 
