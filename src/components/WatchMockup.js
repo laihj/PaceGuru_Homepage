@@ -9,7 +9,7 @@ import { useState } from 'react';
  * watch 截图约定：
  *   public/images/screenshots/{locale}/{home-watch,training-watch}.png
  */
-export default function WatchMockup({ src, alt = '', label = 'Apple Watch' }) {
+export default function WatchMockup({ src, alt = '', label = 'Apple Watch', lazy = true }) {
   const [failed, setFailed] = useState(false);
   const showImage = src && !failed;
 
@@ -27,6 +27,7 @@ export default function WatchMockup({ src, alt = '', label = 'Apple Watch' }) {
             <img
               src={src}
               alt={alt}
+              loading={lazy ? 'lazy' : undefined}
               onError={() => setFailed(true)}
               className="w-full h-full object-cover"
             />

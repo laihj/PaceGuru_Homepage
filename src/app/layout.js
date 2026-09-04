@@ -1,5 +1,4 @@
 import localFont from "next/font/local";
-import { headers } from "next/headers";
 import { SITE_URL } from "../lib/site";
 import "./globals.css";
 
@@ -77,26 +76,19 @@ export const metadata = {
   manifest: '/site.webmanifest',
 };
 
-// lang 跟随 locale：改善 SEO/无障碍，避免 /zh /ja 页面 lang 仍为 en
-// 根 layout 无法拿到 [locale] 子段参数，通过 middleware 注入的 x-pathname 推断
-function langFromPath(pathname) {
-  if (!pathname) return 'en';
-  if (/(^|\/)zh(\/|$)/.test(pathname)) return 'zh-CN';
-  if (/(^|\/)ja(\/|$)/.test(pathname)) return 'ja';
-  return 'en';
-}
+// lang 跟随 locale：改善 SEO/无障碍，避免 /zh /ja 页面 lang 仍为 en。
+// 根 layout 拿不到 [locale] 段参数，此前借 middleware 注入的 header 推断，
+// 但根 layout 调 headers() 会把全站（含首页）拖成动态渲染，TTFB 显著变差。
+// 改为静态输出 lang="en"，再用下面这段同步内联脚本在首帧前按 URL 修正。
+// 逻辑与原服务端版本一致（含 vdot.paceguru.app 子站默认中文）。
+const LANG_FIX_SCRIPT = `(function(){try{var p=location.pathname,l;if(/^(www\\.)?vdot\\.paceguru\\.app$/.test(location.hostname)){var m=p.match(/^\\/(en|zh|ja)(\\/|$)/);l=m?({en:'en',ja:'ja',zh:'zh-CN'})[m[1]]:'zh-CN';}else{l=/(^|\\/)zh(\\/|$)/.test(p)?'zh-CN':/(^|\\/)ja(\\/|$)/.test(p)?'ja':'en';}document.documentElement.lang=l;}catch(e){}})();`;
 
-export default async function RootLayout({ children }) {
-  const headersList = await headers();
-  const vdotLocale = headersList.get('x-vdot-locale');
-  const lang = headersList.get('x-vdot-site') === '1'
-    ? ({ en: 'en', ja: 'ja', zh: 'zh-CN' }[vdotLocale] || 'zh-CN')
-    : langFromPath(headersList.get('x-pathname') || '');
-
+export default function RootLayout({ children }) {
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script dangerouslySetInnerHTML={{ __html: LANG_FIX_SCRIPT }} />
         <meta name="theme-color" content="#8172AD" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#8172AD" />
         <script

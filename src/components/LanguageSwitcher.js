@@ -5,6 +5,9 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { SUPPORTED_LOCALES, LOCALE_NAMES, extractLocaleFromPath, setStoredLocale } from '../lib/i18n';
 
+// 与 layout.js 内联脚本同一映射；客户端切换语言不触发整页刷新，需手动同步 <html lang>
+const HTML_LANG = { en: 'en', zh: 'zh-CN', ja: 'ja' };
+
 export default function LanguageSwitcher({ availableLocales = SUPPORTED_LOCALES }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -12,6 +15,7 @@ export default function LanguageSwitcher({ availableLocales = SUPPORTED_LOCALES 
 
   const handleLanguageChange = (newLocale) => {
     setStoredLocale(newLocale);
+    document.documentElement.setAttribute('lang', HTML_LANG[newLocale] || 'en');
     setIsOpen(false);
   };
 

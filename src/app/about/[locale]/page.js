@@ -7,6 +7,11 @@ import { notFound } from 'next/navigation';
 import { isSupportedLocale } from '../../../lib/i18n';
 import { absoluteUrl } from '../../../lib/site';
 
+// 三个语言构建期预渲染；未知 locale 走 notFound
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'zh' }, { locale: 'ja' }];
+}
+
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const about = getAboutContent(locale);

@@ -23,6 +23,11 @@ function AppStoreButton({ size = 'lg', label }) {
   );
 }
 
+// 三个语言首页构建期预渲染；未知 locale 走 notFound
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'zh' }, { locale: 'ja' }];
+}
+
 export async function generateMetadata({ params }) {
   const { locale } = await params;
 
@@ -478,6 +483,7 @@ export default async function LocalizedHome({ params }) {
                   src={`/images/screenshots/${locale}/home.png`}
                   alt={t.heroTagline}
                   label={t.heroBadge}
+                  priority
                   watchSrc={`/images/screenshots/${locale}/home-watch.png`}
                   watchAlt={t.heroBadge}
                   watchLabel={t.heroBadge}
@@ -632,6 +638,7 @@ export default async function LocalizedHome({ params }) {
                         src={`/images/books/hanson${locale === 'en' ? '_en' : ''}.jpg`}
                         alt={locale === 'en' ? 'Hansons Marathon Method' : '汉森马拉松训练法'}
                         width="112" height="160"
+                        loading="lazy"
                         className="w-full h-full object-cover rounded-lg"
                       />
                     </div>
@@ -663,6 +670,7 @@ export default async function LocalizedHome({ params }) {
                         src={`/images/books/daniels${locale === 'en' ? '_en' : ''}.jpg`}
                         alt={locale === 'en' ? "Daniels' Running Formula" : '丹尼尔斯经典跑步训练法'}
                         width="112" height="160"
+                        loading="lazy"
                         className="w-full h-full object-cover rounded-lg"
                       />
                     </div>

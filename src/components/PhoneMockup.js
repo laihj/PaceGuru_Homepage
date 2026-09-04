@@ -8,6 +8,9 @@ import WatchMockup from './WatchMockup';
  * - 传入 src 时显示截图（object-cover，按 iPhone 15 比例 2.17:1 填充）
  * - 未传 src 或加载失败时回退到占位样式（Apple logo + label）
  * - 可选 watchSrc：在 iPhone 右下角叠加 Apple Watch 表框（占位或截图）
+ * - priority：仅首屏（hero）使用——eager + fetchPriority=high；其余默认
+ *   lazy。React 19 RC 会对每个非 lazy 的 SSR <img> 自动发 preload（Link
+ *   响应头），全站 eager 会让首屏图和非首屏图抢带宽
  * 截图约定：public/images/screenshots/{locale}/{home,sync,training,analytics}.png
  *          public/images/screenshots/{locale}/{home-watch,training-watch}.png
  */
@@ -18,6 +21,7 @@ export default function PhoneMockup({
   watchSrc,
   watchAlt = '',
   watchLabel = 'Apple Watch',
+  priority = false,
 }) {
   const [failed, setFailed] = useState(false);
   const showImage = src && !failed;
@@ -34,6 +38,8 @@ export default function PhoneMockup({
               <img
                 src={src}
                 alt={alt}
+                loading={priority ? 'eager' : 'lazy'}
+                fetchPriority={priority ? 'high' : undefined}
                 onError={() => setFailed(true)}
                 className="w-full h-full object-cover"
               />
@@ -54,7 +60,7 @@ export default function PhoneMockup({
       {/* Apple Watch 叠加在 iPhone 右下角 */}
       {watchSrc !== undefined && (
         <div className="absolute -bottom-4 -right-2 sm:-right-6 z-20 rotate-[6deg]">
-          <WatchMockup src={watchSrc} alt={watchAlt} label={watchLabel} />
+          <WatchMockup src={watchSrc} alt={watchAlt} label={watchLabel} lazy={!priority} />
         </div>
       )}
     </div>
